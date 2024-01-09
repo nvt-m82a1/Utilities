@@ -91,6 +91,17 @@ namespace Utilities.Container.Base
         }
 
         /// <summary>
+        /// Đọc một bit dữ liệu, không tăng vị trí đọc
+        /// </summary>
+        /// <returns></returns>
+        public bool? Scan()
+        {
+            if (ReadTotal >= Total) return null;
+            var data = (Data[ReadItor] & (1 << ReadOffset)) == 0 ? false : true;
+            return data;
+        }
+
+        /// <summary>
         /// Đọc một mảng bit dữ liệu
         /// </summary>
         public bool?[] ReadArray(int length)
@@ -104,9 +115,18 @@ namespace Utilities.Container.Base
 
         public void ReadReset()
         {
+            ReadTotal = 0;
             ReadItor = 0;
             ReadOffset = 0;
-            ReadTotal = 0;
+        }
+
+        public void Clear()
+        {
+            Total = 0;
+            Offset = 0;
+            Template = 0;
+            Data.Clear();
+            ReadReset();
         }
 
         public IEnumerable<byte> Export()
@@ -121,7 +141,7 @@ namespace Utilities.Container.Base
         public int Import(byte[] buffer, int start = 0)
         {
             byte length = buffer[start + 0];
-            if (length == 0)
+            if (length == 1)
                 return start + length;
 
             Offset = buffer[start + 1];

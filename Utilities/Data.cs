@@ -1,4 +1,4 @@
-﻿using Utilities.Container.Buildin;
+﻿using Utilities.Container.Option;
 
 namespace Utilities
 {
@@ -11,6 +11,7 @@ namespace Utilities
         public int f;
         public Data2 g { get; set; }
         public int h;
+        public bool[] j;
     }
 
     [ClassContainer]

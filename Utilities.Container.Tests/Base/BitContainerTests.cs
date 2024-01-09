@@ -79,5 +79,29 @@
                 Assert.IsTrue(arr[i] == arr2[i]);
             }
         }
+
+        [TestMethod()]
+        public void ResetClearTests()
+        {
+            var container = new BitContainer();
+            container.Add(false);
+
+            container.Clear();
+            Assert.AreEqual(0, container.TotalElements);
+
+            container.Add(true);
+            container.Add(false);
+            Assert.AreEqual(2, container.TotalElements);
+
+            Assert.AreEqual(true, container.Read());
+            Assert.AreEqual(false, container.Read());
+            Assert.AreEqual(null, container.Read());
+
+            container.ReadReset();
+
+            Assert.AreEqual(true, container.Read());
+            Assert.AreEqual(false, container.Read());
+            Assert.AreEqual(null, container.Read());
+        }
     }
 }

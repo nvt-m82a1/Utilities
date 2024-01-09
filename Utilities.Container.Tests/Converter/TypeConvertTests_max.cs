@@ -1,20 +1,21 @@
 ﻿using System.Text;
-using Utilities.Container.Datatype;
+using Utilities.Container.BaseType;
+using Utilities.Container.Option;
 
 namespace Utilities.Container.Converter.Tests
 {
     [TestClass()]
-    public class TypeConvertTests_min
+    public class TypeConvertTests_max
     {
         [TestMethod()]
         public void ItemToBytesTest_Boolean_false()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Boolean));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Boolean));
 
-            Boolean data = false;
+            Boolean data = true;
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
 
-            var expected = new byte[] { 0 };
+            var expected = new byte[] { 1 };
 
             Assert.IsTrue(bytes != null);
             Assert.IsTrue(expected.SequenceEqual(bytes));
@@ -23,11 +24,11 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Byte()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Byte));
-            Byte data = Byte.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Byte));
+            Byte data = Byte.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
-            var expected = new byte[] { Byte.MinValue };
+            var expected = new byte[] { Byte.MaxValue };
 
             Assert.IsTrue(bytes != null);
             Assert.IsTrue(expected.SequenceEqual(bytes));
@@ -36,11 +37,11 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_SByte()
         {
-            CType ctype = TypesRead.CreateCType(typeof(SByte));
-            SByte data = SByte.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(SByte));
+            SByte data = SByte.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
-            var data2 = unchecked((byte)((sbyte)SByte.MinValue));
+            var data2 = unchecked((byte)((sbyte)SByte.MaxValue));
             var expected = new byte[] { data2 };
 
             Assert.IsTrue(bytes != null);
@@ -50,8 +51,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Char()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Char));
-            Char data = Char.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Char));
+            Char data = Char.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -63,8 +64,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int16()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int16));
-            Int16 data = Int16.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int16));
+            Int16 data = Int16.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -76,8 +77,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_UInt16()
         {
-            CType ctype = TypesRead.CreateCType(typeof(UInt16));
-            UInt16 data = UInt16.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(UInt16));
+            UInt16 data = UInt16.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -89,8 +90,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int32()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int32));
-            Int32 data = Int32.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int32));
+            Int32 data = Int32.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -102,8 +103,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_UInt32()
         {
-            CType ctype = TypesRead.CreateCType(typeof(UInt32));
-            UInt32 data = UInt32.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(UInt32));
+            UInt32 data = UInt32.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -115,8 +116,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Single()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Single));
-            Single data = Single.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Single));
+            Single data = Single.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -128,8 +129,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Double()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Double));
-            Double data = Double.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Double));
+            Double data = Double.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -141,8 +142,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int64()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int64));
-            Int64 data = Int64.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int64));
+            Int64 data = Int64.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data);
@@ -154,8 +155,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Decimal()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Decimal));
-            Decimal data = Decimal.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Decimal));
+            Decimal data = Decimal.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var ints = decimal.GetBits(data);
@@ -168,8 +169,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_String()
         {
-            CType ctype = TypesRead.CreateCType(typeof(String));
-            String data = String.Empty;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(String));
+            String data = string.Join(String.Empty, Enumerable.Repeat("wer45sdf", 1234));
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var len = data.Length;
@@ -182,8 +183,8 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_DateTime()
         {
-            CType ctype = TypesRead.CreateCType(typeof(DateTime));
-            DateTime data = DateTime.MinValue;
+            TypeInfo ctype = TypesPool.GetInfo(typeof(DateTime));
+            DateTime data = DateTime.MaxValue;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
             var expected = BitConverter.GetBytes(data.ToBinary());
@@ -195,7 +196,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Guid()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Guid));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Guid));
             Guid data = Guid.NewGuid();
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);

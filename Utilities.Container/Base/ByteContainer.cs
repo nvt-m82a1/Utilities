@@ -116,9 +116,21 @@ namespace Utilities.Container.Base
         public byte[] ReadItems(int length)
         {
             var data = new byte[length];
-            var minLength = Math.Min(Items.Count, length);
+            var minLength = Math.Min(Items.Count - ItemIter, length);
             for (int i = 0; i < minLength; i++)
                 data[i] = ReadItem() ?? 0;
+            return data;
+        }
+
+        /// <summary>
+        /// Đọc nhiều dữ liệu đơn, không tăng vị trí đọc
+        /// </summary>
+        public byte[] ScanItems(int length)
+        {
+            var data = new byte[length];
+            var minLength = Math.Min(Items.Count - ItemIter, length);
+            for (int i = 0; i < minLength; i++)
+                data[i] = Items[ItemIter + i];
             return data;
         }
 
@@ -159,9 +171,18 @@ namespace Utilities.Container.Base
         public void ReadReset()
         {
             ItemIter = 0;
+            Bits.ReadReset();
             ArraySizeIter = 0;
             ArrayIter = 0;
-            Bits.ReadReset();
+        }
+
+        public void Clear()
+        {
+            Items.Clear();
+            Bits.Clear();
+            ArraySizes.Clear();
+            Arrays.Clear();
+            ReadReset();
         }
 
         public IEnumerable<byte> Export()
@@ -185,7 +206,7 @@ namespace Utilities.Container.Base
         public int Import(byte[] buffer, int start = 0)
         {
             int length = BitConverter.ToInt32(buffer, start);
-            if (length == 0)
+            if (length == 4)
                 return start + length;
 
             int itemCount = BitConverter.ToInt32(buffer, start + 4);

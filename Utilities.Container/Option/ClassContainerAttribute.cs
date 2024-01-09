@@ -1,4 +1,4 @@
-﻿namespace Utilities.Container.Buildin
+﻿namespace Utilities.Container.Option
 {
     /// <summary>
     /// Class được đọc và ghi vào một container

@@ -100,5 +100,60 @@
             Assert.IsTrue(items1.SequenceEqual(items3.ToArray()));
             Assert.IsTrue(items2.SequenceEqual(items4.ToArray()));
         }
+
+        [TestMethod()]
+        public void ResetClearTests_item()
+        {
+            var container = new ByteContainer();
+            container.AddItem(1);
+
+            container.Clear();
+            Assert.AreEqual(0, container.TotalElements);
+
+            container.AddItem(2);
+            container.AddItem(3);
+            Assert.AreEqual(2, container.TotalElements);
+
+            Assert.AreEqual((byte)2, container.ReadItem());
+            Assert.AreEqual((byte)3, container.ReadItem());
+            Assert.AreEqual(null, container.ReadItem());
+
+            container.ReadReset();
+
+            Assert.AreEqual((byte)2, container.ReadItem());
+            Assert.AreEqual((byte)3, container.ReadItem());
+            Assert.AreEqual(null, container.ReadItem());
+        }
+
+        [TestMethod()]
+        public void ResetClearTests_items()
+        {
+            byte[] byte1 = [1, 2, 3];
+            byte[] byte2 = [4, 5, 6];
+
+            var container = new ByteContainer();
+            container.AddItems(byte1);
+
+            container.Clear();
+            Assert.AreEqual(0, container.TotalElements);
+            
+            container.AddItems(byte2);
+            Assert.AreEqual(3, container.TotalElements);
+
+            byte[] bytes = container.ReadItems(4);
+            Assert.AreEqual(byte2[0], bytes[0]);
+            Assert.AreEqual(byte2[1], bytes[1]);
+            Assert.AreEqual(byte2[2], bytes[2]);
+            Assert.AreEqual(0, bytes[3]);
+
+            container.ReadReset();
+
+            byte[] bytes2 = container.ReadItems(4);
+            Assert.AreEqual(byte2[0], bytes2[0]);
+            Assert.AreEqual(byte2[1], bytes2[1]);
+            Assert.AreEqual(byte2[2], bytes2[2]);
+            Assert.AreEqual(0, bytes2[3]);
+
+        }
     }
 }

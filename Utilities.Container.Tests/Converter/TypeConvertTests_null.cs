@@ -1,4 +1,5 @@
-﻿using Utilities.Container.Datatype;
+﻿using Utilities.Container.BaseType;
+using Utilities.Container.Option;
 
 namespace Utilities.Container.Converter.Tests
 {
@@ -8,7 +9,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Boolean_true()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Boolean));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Boolean));
             Boolean? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -19,7 +20,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Boolean_false()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Boolean));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Boolean));
 
             Boolean? data = null;
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -30,7 +31,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Byte()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Byte));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Byte));
             Byte? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -41,7 +42,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_SByte()
         {
-            CType ctype = TypesRead.CreateCType(typeof(SByte));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(SByte));
             SByte? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -52,7 +53,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Char()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Char));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Char));
             Char? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -63,7 +64,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int16()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int16));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int16));
             Int16? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -74,7 +75,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_UInt16()
         {
-            CType ctype = TypesRead.CreateCType(typeof(UInt16));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(UInt16));
             UInt16? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -85,7 +86,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int32()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int32));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int32));
             Int32? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -96,7 +97,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_UInt32()
         {
-            CType ctype = TypesRead.CreateCType(typeof(UInt32));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(UInt32));
             UInt32? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -107,7 +108,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Single()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Single));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Single));
             Single? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -118,7 +119,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Double()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Double));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Double));
             Double? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -129,7 +130,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Int64()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Int64));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Int64));
             Int64? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -140,7 +141,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Decimal()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Decimal));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Decimal));
             Decimal? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -151,7 +152,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_String()
         {
-            CType ctype = TypesRead.CreateCType(typeof(String));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(String));
             String? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -162,7 +163,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_DateTime()
         {
-            CType ctype = TypesRead.CreateCType(typeof(DateTime));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(DateTime));
             DateTime? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
@@ -173,7 +174,7 @@ namespace Utilities.Container.Converter.Tests
         [TestMethod()]
         public void ItemToBytesTest_Guid()
         {
-            CType ctype = TypesRead.CreateCType(typeof(Guid));
+            TypeInfo ctype = TypesPool.GetInfo(typeof(Guid));
             Guid? data = null;
 
             var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);

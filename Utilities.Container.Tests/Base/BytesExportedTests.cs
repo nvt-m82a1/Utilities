@@ -1,4 +1,4 @@
-﻿using Utilities.Container.Buildin;
+﻿using Utilities.Container.Converter;
 using Utilities.Container.Tests.__models;
 
 namespace Utilities.Container.Base.Tests
@@ -9,15 +9,16 @@ namespace Utilities.Container.Base.Tests
         [TestMethod()]
         public void BytesExported_empty()
         {
-            var writer = new TypeWriter();
-            var bytes = writer.Container.Export().ToArray();
-
-            Assert.IsTrue(bytes.Length >= 4);
+            var bytes = DataConvert.Instance.GetBytes(Array.Empty<int>());
+            
+            Assert.IsNotNull(bytes);
+            Assert.IsTrue(bytes.Length == 12);
             var len = BitConverter.ToInt32(bytes, 0);
             Assert.AreEqual(len, bytes.Length);
         }
 
         [TestMethod()]
+
         public void BytesExported_complex()
         {
             var item = new DataTest.ItemComplex
@@ -30,6 +31,11 @@ namespace Utilities.Container.Base.Tests
                 {
                     Items = [26349, 283478, 23871, 2387, 123],
                 },
+                List2 = new DataTest.List2
+                {
+                    Items = [6875, 5475, 54784, 6578, 5784],
+                    Items2 = [6542, 457, 4875, 6564, 54841],
+                },
                 Dictionary2 = new DataTest.Dictionary2
                 {
                     Pair = new Dictionary<string, string>
@@ -40,22 +46,16 @@ namespace Utilities.Container.Base.Tests
                 }
             };
 
-            var writer = new TypeWriter();
-            writer.AddClass(item);
-
-            var bytes = writer.Container.Export().ToArray();
+            var bytes = DataConvert.Instance.GetBytes(item);
+            Assert.IsNotNull(bytes);
             Assert.IsTrue(bytes.Length > 4);
+
             var len = BitConverter.ToInt32(bytes, 0);
             Assert.AreEqual(len, bytes.Length);
 
-            var reader = new TypeReader(bytes);
-            var bytes2 = reader.Container.Export().ToArray();
-            Assert.AreEqual(bytes.Length, bytes2.Length);
-            Assert.IsTrue(bytes.SequenceEqual(bytes2));
+            var item2 = DataConvert.Instance.GetItem<DataTest.ItemComplex>(bytes);
 
-            var item2 = new DataTest.ItemComplex();
-            reader.FillInstance(item2);
-
+            Assert.IsNotNull(item2);
             Assert.AreEqual(item.Id, item2.Id);
             Assert.AreEqual(item.Item1.Id, item2.Item1.Id);
             Assert.AreEqual(item.Item2.Id, item2.Item2.Id);
@@ -65,6 +65,10 @@ namespace Utilities.Container.Base.Tests
             Assert.AreEqual(item.Item3.Description, item2.Item3.Description);
             Assert.AreEqual(item.List1.Items.Count, item2.List1.Items.Count);
             Assert.IsTrue(item.List1.Items.SequenceEqual(item2.List1.Items));
+            Assert.AreEqual(item.List2.Items.Count, item2.List2.Items.Count);
+            Assert.IsTrue(item.List2.Items.SequenceEqual(item2.List2.Items));
+            Assert.AreEqual(item.List2.Items2.Length, item2.List2.Items2.Length);
+            Assert.IsTrue(item.List2.Items2.SequenceEqual(item2.List2.Items2));
             Assert.AreEqual(item.Dictionary2.Pair.Count, item2.Dictionary2.Pair.Count);
             foreach (var kvp in item.Dictionary2.Pair)
             {

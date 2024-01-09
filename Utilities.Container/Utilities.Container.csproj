@@ -8,10 +8,13 @@
 		<Title>Data Container</Title>
 		<Description>Lưu trữ và đọc dữ liệu</Description>
 		<Copyright></Copyright>
-		<IncludeSymbols>False</IncludeSymbols>
-		<EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<PackageLicenseExpression>MS-PL</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<FileVersion>1.0.1</FileVersion>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Utilities.Container.Buildin;
+﻿using Utilities.Container.Option;
 
 namespace Utilities.Container.Tests.__models
 {
@@ -32,11 +32,19 @@ namespace Utilities.Container.Tests.__models
         }
 
         [ClassContainer]
+        public class List2
+        {
+            public List<int> Items;
+            public int[] Items2;
+        }
+
+        [ClassContainer]
         public class Dictionary2
         {
             public Dictionary<string, string> Pair;
         }
 
+        [ClassContainer]
         public class ItemComplex
         {
             public int Id { get; set; }
@@ -44,9 +52,11 @@ namespace Utilities.Container.Tests.__models
             public Item2 Item2 { get; set; }
             public Item3 Item3 { get; set; }
             public List1 List1 { get; set; }
+            public List2 List2 { get; set; }
             public Dictionary2 Dictionary2 { get; set;}
         }
 
+        [ClassContainer]
         public class FieldPropEvent
         {
             public int Field1;

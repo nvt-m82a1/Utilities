@@ -1,6 +1,6 @@
-﻿namespace Utilities.Container.Datatype
+﻿namespace Utilities.Container.Option
 {
-    public class Types
+    public class TypesName
     {
         /// <summary>
         /// Tên đầy đủ một số kiểu dữ liệu
@@ -45,6 +45,8 @@
                 public const string CStack1 = "ConcurrentStack`1";
 
                 public const string IDictionary2 = "IDictionary`2";
+                public const string IList1 = "IList`1";
+                public const string IEnumerable = "IEnumerable";
                 public const string IEnumerable1 = "IEnumerable`1";
                 public const string Concat2Iterator1 = "Concat2Iterator`1";
                 public const string ConcatNIterator1 = "ConcatNIterator`1";
@@ -52,25 +54,5 @@
 
             public const string Nullable1 = "Nullable`1";
         }
-    }
-
-    /// <summary>
-    /// Dữ liệu định dạng chuyển đổi
-    /// </summary>
-    public class CType
-    {
-        public string? FullName;
-        public bool IsEnumerable;
-        public bool IsNullable;
-        public bool IsPair;
-        public bool IsList;
-        public bool IsBoolean;
-        public bool IsContainer;
-        public bool IsGeneric;
-        public Type? CustomType;
-        public Func<object?, object?>? GetValue;
-        public Action<object?, object?>? SetValue;
-
-        public CType[]? Others;
     }
 }

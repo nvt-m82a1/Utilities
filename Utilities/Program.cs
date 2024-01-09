@@ -1,4 +1,4 @@
-﻿using Utilities.Container.Buildin;
+﻿using Utilities.Container.Converter;
 
 namespace Utilities
 {
@@ -14,17 +14,13 @@ namespace Utilities
                 f = 4567867,
                 g = new Data2 { c = 5467867, d = "w65e4r6sdf654" },
                 h = 8665145,
+                j = [true, false, true]
             };
 
-            var writer = new TypeWriter();
-            writer.AddClass(data);
+            var bytes = DataConvert.Instance.GetBytes(data);
 
-            var bytes = writer.Container.Export();
-            var reader = new TypeReader(bytes.ToArray());
-            var bytes2 = reader.Container.Export();
-
-            var instance = new Data();
-            reader.FillInstance(instance);
+            var data2 = DataConvert.Instance.GetItem<Data>(bytes!);
+            var bytes2 = DataConvert.Instance.GetBytes(data2);
 
             Console.WriteLine("same bytes output: " + bytes.SequenceEqual(bytes2));
 
