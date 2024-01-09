@@ -5,7 +5,7 @@ using Utilities.Container.Converter;
 
 namespace Utilities.Container.Datatype
 {
-    internal class TypeBoolean : TypeBase
+    public class TypeBoolean : TypeBase
     {
         public TypeBoolean(Type type) : base(type)
         {
@@ -16,7 +16,7 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() != true)
+            if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
             {
@@ -44,7 +44,7 @@ namespace Utilities.Container.Datatype
 
         public override void Write(object? value, DataContainer container, TypeConvert converter)
         {
-            container.AddBoolean(value != null);
+            container.AddBoolean(value == null);
             if (value == null) return;
 
             container.AddBoolean((bool)value);

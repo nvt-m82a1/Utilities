@@ -110,10 +110,10 @@ namespace Utilities.Container.Option
                         targetName = targetName.Replace("[]", "");
 
                         var isNullable = targetName.Last() == '?';
-                        var isBoolean = targetName.Replace("?", "") == FullName.Boolean;
+                        var isBooleanArray = targetName.Replace("?", "") == FullName.Boolean;
                         targetName = targetName.Replace("?", "");
 
-                        if (isBoolean)
+                        if (isBooleanArray)
                         {
                             var type = new TypeList(typeof(List<>).MakeGenericType(typeof(bool)), "Add", typeof(Boolean));
                             type.Info.IsArray = true;
@@ -132,9 +132,12 @@ namespace Utilities.Container.Option
                     }
 
                     var isCustom = Attribute.IsDefined(target, typeof(ClassContainerAttribute));
-                    return isCustom
-                        ? new TypeCustom(target)
-                        : new TypeBuildin(target);
+                    if (isCustom) return new TypeCustom(target);
+
+                    var isBoolean = target.FullName == FullName.Boolean;
+                    if (isBoolean) return new TypeBoolean(target);
+
+                    return new TypeBuildin(target);
             }
 
             throw new TypeNotfoundException(target.FullName ?? target.Name);

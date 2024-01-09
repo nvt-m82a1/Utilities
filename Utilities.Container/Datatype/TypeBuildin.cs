@@ -7,7 +7,7 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
-    internal class TypeBuildin : TypeBase
+    public class TypeBuildin : TypeBase
     {
         public TypeBuildin(Type type) : base(type)
         {
@@ -18,7 +18,7 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() != true)
+            if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
                 Read(container, converter, (value, _) => Binding.SetValue.Invoke(wrap, value));
@@ -43,7 +43,7 @@ namespace Utilities.Container.Datatype
 
         public override void Write(object? value, DataContainer container, TypeConvert converter)
         {
-            container.AddBoolean(value != null);
+            container.AddBoolean(value == null);
 
             if (value == null) return;
             var bytes = converter.ItemToBytes(this.Info, value);

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Utilities.Container.BaseType
+﻿namespace Utilities.Container.BaseType
 {
     /// <summary>
     /// Lưu những thông tin về type

@@ -6,7 +6,7 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
-    internal class TypeCustom : TypeBase
+    public class TypeCustom : TypeBase
     {
         public TypeCustom(Type type) : base(type, type.GenericTypeArguments)
         {
@@ -17,7 +17,7 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() != true)
+            if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
                 Read(container, converter, (instance, _) => Binding.SetValue.Invoke(wrap, instance));
@@ -47,7 +47,7 @@ namespace Utilities.Container.Datatype
 
         public override void Write(object? innerWrap, DataContainer container, TypeConvert converter)
         {
-            container.AddBoolean(innerWrap != null);
+            container.AddBoolean(innerWrap == null);
             if (innerWrap == null) return;
 
             var subContainer = new DataContainer();

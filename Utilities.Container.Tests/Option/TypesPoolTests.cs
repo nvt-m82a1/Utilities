@@ -1,4 +1,5 @@
-﻿using Utilities.Container.Tests.__models;
+﻿using Utilities.Container.Datatype;
+using Utilities.Container.Tests.__models;
 
 namespace Utilities.Container.Option.Tests
 {
@@ -50,5 +51,76 @@ namespace Utilities.Container.Option.Tests
             var type = TypesPool.Scan(null);
             Assert.IsTrue(type.Count() == 0);
         }
+
+        [TestMethod()]
+        public void CreateTest_TypeBoolean()
+        {
+            var type = TypesPool.Create(typeof(bool));
+            Assert.IsTrue(type is TypeBoolean);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeBuildin_int()
+        {
+            var type = TypesPool.Create(typeof(int));
+            Assert.IsTrue(type is TypeBuildin);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeBuildin_string()
+        {
+            var type = TypesPool.Create(typeof(string));
+            Assert.IsTrue(type is TypeBuildin);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeCustom()
+        {
+            var type = TypesPool.Create(typeof(DataTest.Item1));
+            Assert.IsTrue(type is TypeCustom);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeList()
+        {
+            var type = TypesPool.Create(typeof(List<int>));
+            Assert.IsTrue(type is TypeList);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeList_Stack()
+        {
+            var type = TypesPool.Create(typeof(Stack<int>));
+            Assert.IsTrue(type is TypeList);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeList_Queue()
+        {
+            var type = TypesPool.Create(typeof(Queue<int>));
+            Assert.IsTrue(type is TypeList);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeList_LinkedList()
+        {
+            var type = TypesPool.Create(typeof(LinkedList<int>));
+            Assert.IsTrue(type is TypeList);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypeList_array()
+        {
+            var type = TypesPool.Create(typeof(int[]));
+            Assert.IsTrue(type is TypeList);
+        }
+
+        [TestMethod()]
+        public void CreateTest_TypePair()
+        {
+            var type = TypesPool.Create(typeof(Dictionary<int, string>));
+            Assert.IsTrue(type is TypePair);
+        }
+
     }
 }

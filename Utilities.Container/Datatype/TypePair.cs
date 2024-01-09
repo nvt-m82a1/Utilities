@@ -7,7 +7,7 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
-    internal class TypePair : TypeBase
+    public class TypePair : TypeBase
     {
         public TypePair(Type type) : base(type, type.GenericTypeArguments)
         {
@@ -17,7 +17,7 @@ namespace Utilities.Container.Datatype
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
-            if (container.ReadBoolean() != true)
+            if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
             {
@@ -63,7 +63,7 @@ namespace Utilities.Container.Datatype
 
         public override void Write(object? value, DataContainer container, TypeConvert converter)
         {
-            container.AddBoolean(value != null);
+            container.AddBoolean(value == null);
             if (value == null) return;
 
             var pair = (IDictionary)value;

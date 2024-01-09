@@ -7,7 +7,7 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
-    internal class TypeList : TypeBase
+    public class TypeList : TypeBase
     {
         protected Type WrapType;
         protected string AddMethodName;
@@ -23,7 +23,7 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() != true)
+            if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
             {
@@ -95,7 +95,7 @@ namespace Utilities.Container.Datatype
 
         public override void Write(object? value, DataContainer container, TypeConvert converter)
         {
-            container.AddBoolean(value != null);
+            container.AddBoolean(value == null);
             if (value == null) return;
 
             var length = 0;
