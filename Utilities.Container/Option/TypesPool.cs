@@ -94,6 +94,7 @@ namespace Utilities.Container.Option
                 case Name.Enumerable.IEnumerable1:
                 case Name.Enumerable.Concat2Iterator1:
                 case Name.Enumerable.ConcatNIterator1:
+                case Name.Enumerable.SelectRangeIterator1:
                     return new TypeList(typeof(List<>).MakeGenericType(target.GenericTypeArguments[0]), "Add", target.GenericTypeArguments[0]);
 
                 case Name.Nullable1:

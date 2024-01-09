@@ -53,6 +53,9 @@ namespace Utilities.Container.Option.Tests
             Assert.AreEqual(TypesName.Name.Enumerable.ConcatNIterator1, concatN.GetType().Name);
 
             Assert.AreEqual(TypesName.Name.Nullable1, typeof(int?).Name);
+
+            var range1 = Enumerable.Range(0, 10).Select(x => x);
+            Assert.AreEqual(TypesName.Name.Enumerable.SelectRangeIterator1, range1.GetType().Name);
         }
     }
 }
