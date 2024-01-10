@@ -51,6 +51,7 @@
                 public const string Concat2Iterator1 = "Concat2Iterator`1";
                 public const string ConcatNIterator1 = "ConcatNIterator`1";
                 public const string SelectRangeIterator1 = "SelectRangeIterator`1";
+                public const string DistinctIterator1 = "DistinctIterator`1";
             }
 
             public const string Nullable1 = "Nullable`1";
