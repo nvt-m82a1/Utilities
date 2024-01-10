@@ -137,7 +137,7 @@ namespace Utilities.Container.Base
         /// <summary>
         /// Đọc một mảng dữ liệu
         /// </summary>
-        /// <returns>(Số lượng phần tử, mảng dưới dạng bytes)</returns>
+        /// <returns>(Kích thước mảng, mảng dưới dạng bytes)</returns>
         public (int, IEnumerable<byte>?) ReadArray()
         {
             if (ArrayIter >= Arrays.Count || ArraySizeIter >= ArraySizes.Count)
@@ -147,9 +147,10 @@ namespace Utilities.Container.Base
 
             if (largeSize != true)
             {
-                int size = ArraySizes[ArrayIter];
+                int size = ArraySizes[ArraySizeIter];
                 var bytes = Arrays[ArrayIter];
                 ArrayIter++;
+                ArraySizeIter++;
                 return (size, bytes);
             }
             else
@@ -164,7 +165,7 @@ namespace Utilities.Container.Base
                 var bytes = Arrays[ArrayIter];
                 ArrayIter++;
                 ArraySizeIter += 4;
-                return (size, bytes.ToArray());
+                return (size, bytes);
             }
         }
 
