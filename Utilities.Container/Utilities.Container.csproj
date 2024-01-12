@@ -4,6 +4,9 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<Version>1.0.3</Version>
+		<FileVersion>1.0.3</FileVersion>
+		<AssemblyVersion>1.0.3</AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Data Container</Title>
 		<Description>Lưu trữ và đọc dữ liệu</Description>
@@ -13,9 +16,7 @@
 		<PackageLicenseExpression>MS-PL</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<FileVersion>1.0.1</FileVersion>
-		<AssemblyVersion>1.0.1</AssemblyVersion>
-		<Version>1.0.1</Version>
+		<PackageProjectUrl></PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

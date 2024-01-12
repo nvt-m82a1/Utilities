@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.Container", "Utilities.Container\Utilities.Container.csproj", "{4137F3A8-EEAC-468C-A73A-CE87674DF559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Container.Tests", "Utilities.Container.Tests\Utilities.Container.Tests.csproj", "{1BC32C03-BA4B-410F-8C97-D286404C9423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.Container.Tests", "Utilities.Container.Tests\Utilities.Container.Tests.csproj", "{1BC32C03-BA4B-410F-8C97-D286404C9423}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.Container.Storage.Tests", "Utilities.Container.StorageTests\Utilities.Container.Storage.Tests.csproj", "{2E927883-BFF8-43BC-8434-B2BCB172BEB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1BC32C03-BA4B-410F-8C97-D286404C9423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BC32C03-BA4B-410F-8C97-D286404C9423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BC32C03-BA4B-410F-8C97-D286404C9423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E927883-BFF8-43BC-8434-B2BCB172BEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E927883-BFF8-43BC-8434-B2BCB172BEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E927883-BFF8-43BC-8434-B2BCB172BEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E927883-BFF8-43BC-8434-B2BCB172BEB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
