@@ -44,22 +44,8 @@ namespace Utilities.Container.Storage
         {
             if (mapKey.ContainsKey(key)) return false;
 
-            // Map key = thời gian và hàm lấy dữ liệu
-            Func<object?> actionGetValue = () =>
-            {
-                try
-                {
-                    var value = getValue();
-                    return value;
-                }
-                catch (Exception ex)
-                {
-                    mapException[key] = ex.ToString();
-                    return default;
-                }
-            };
+            Func<object?> actionGetValue = () => getValue();
             mapKey[key] = (timeInterval, actionGetValue);
-            // End Map key
 
             if (!mapTimer.ContainsKey(timeInterval))
             {
