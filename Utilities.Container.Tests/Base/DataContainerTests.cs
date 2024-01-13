@@ -1,6 +1,4 @@
-﻿using Utilities.Container.Base;
-
-namespace Utilities.Container.Tests.Base
+﻿namespace Utilities.Container.Base.Tests
 {
     [TestClass()]
     public class DataContainerTests

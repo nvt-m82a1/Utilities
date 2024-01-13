@@ -11,27 +11,32 @@ namespace Utilities.Container.Storage
         /// <summary>
         /// Số lượng bản ghi tối đa
         /// </summary>
-        public int Total { get; private set; }
+        public int Total { get; protected set; }
+
+        /// <summary>
+        /// Số lượng bản ghi hiện tại
+        /// </summary>
+        public int Count { get; protected set; }
 
         /// <summary>
         /// Vị trí bản ghi mới nhất
         /// </summary>
-        public int Index { get; private set; }
+        public int Index { get; protected set; }
 
         /// <summary>
         /// Đã ghi đủ tất cả số lượng bản ghi
         /// </summary>
-        public bool Filled { get; private set; }
+        public bool Filled => Count == Total;
 
         /// <summary>
         /// Dữ liệu bản ghi
         /// </summary>
-        public byte[]?[] Data { get; private set; }
+        public byte[]?[] Data { get; protected set; }
 
         /// <summary>
         /// Thời gian lưu bản ghi
         /// </summary>
-        public long[] Timestamp { get; private set; }
+        public long[] Timestamp { get; protected set; }
 
         public BackupItem(int numberOfBackup)
         {
@@ -42,20 +47,31 @@ namespace Utilities.Container.Storage
         }
 
         /// <summary>
+        /// Tính vị trí index mới so với vị trí index hiện tại
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        protected int GetIndex(int index, int offset)
+        {
+            return (index + Total + offset) % Total;
+        }
+
+        /// <summary>
         /// Thêm một bản
         /// </summary>
         /// <param name="data">Dữ liệu</param>
         /// <returns>Thành công (True)</returns>
         public bool Add(byte[]? data)
         {
+            if (Total == 0) return false;
+
             Index++;
+            if (Count < Total) Count++;
             if (Index >= Total)
             {
                 Index = 0;
-                Filled = true;
             }
 
-            if (Total == 0) return false;
             Data[Index] = data;
             Timestamp[Index] = DateTime.Now.Ticks;
 
@@ -69,9 +85,9 @@ namespace Utilities.Container.Storage
         /// <returns>Dữ liệu</returns>
         public byte[]? Get(int reverseIndex)
         {
-            if (Total == 0 || reverseIndex > Total) return null;
+            if (Total == 0 || reverseIndex >= Count) return null;
 
-            var targetIndex = (Index + Total - reverseIndex) % Total;
+            var targetIndex = GetIndex(Index, -reverseIndex);
 
             return Data[targetIndex];
         }
@@ -84,28 +100,25 @@ namespace Utilities.Container.Storage
         /// <returns></returns>
         public byte[]? Get(long timestamp, int reverseIndex = 0)
         {
-            if (Total == 0 || reverseIndex > Total) return null;
+            if (Total == 0 || reverseIndex >= Count) return null;
 
-            // Chỉ số max index là Total - 1 nếu đã fill, hoặc Index nếu chưa fill
-            var maxIndex = Filled ? Total - 1 : Index;
+            var iterIndex = Index;
+            var iterCount = 0;
 
-            var timestampIndex = Index;
-            var timestampCount = 0;
-
-            for (var i = 0; i <= maxIndex; i++)
+            for (var i = 0; i < Count; i++)
             {
-                if (Timestamp[timestampIndex] > timestamp)
+                if (Timestamp[iterIndex] > timestamp)
                 {
-                    timestampIndex = (timestampIndex + Total - 1) % Total;
-                    timestampCount++;
+                    iterIndex = GetIndex(iterIndex, -1);
+                    iterCount++;
                 }
                 else break;
             }
 
-            if (timestampCount + reverseIndex > maxIndex) return null;
-            if (!Filled && timestampIndex - reverseIndex < 0) return null;
-            
-            var targetIndex = (timestampIndex + Total - reverseIndex) % Total;
+            if (iterCount + reverseIndex >= Count) return null;
+            if (!Filled && iterIndex - reverseIndex < 0) return null;
+
+            var targetIndex = GetIndex(iterIndex, -reverseIndex);
             return Data[targetIndex];
         }
     }

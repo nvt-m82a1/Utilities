@@ -9,6 +9,12 @@ namespace Utilities.Container.Converter
         public static DataConvert Instance = new DataConvert();
         private DataConvert() { }
 
+        /// <summary>
+        /// Lấy một định dạng bytes từ data
+        /// </summary>
+        /// <typeparam name="T">Kiểu dữ liệu</typeparam>
+        /// <param name="data">Đối tượng</param>
+        /// <returns></returns>
         public byte[]? GetBytes<T>(T? data)
         {
             if (data == null) return null;
@@ -20,9 +26,16 @@ namespace Utilities.Container.Converter
             return dataContainer.Export().ToArray();
         }
 
+        /// <summary>
+        /// Lấy giá trị trong data
+        /// </summary>
+        /// <typeparam name="T">Kiểu dữ liệu</typeparam>
+        /// <param name="data">Dữ liệu</param>
+        /// <returns></returns>
         public T? GetItem<T>(byte[]? data)
         {
             if (data == null) return default;
+
             var wrap = new TypeWrap<T>();
             var wrapType = TypesPool.Scan(typeof(TypeWrap<T>));
             var dataType = wrapType[0];
