@@ -16,7 +16,10 @@
 		<PackageLicenseExpression>MS-PL</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<PackageProjectUrl></PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/nvt-m82a1/Utilities</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/nvt-m82a1/Utilities</RepositoryUrl>
+		<PackageTags>Data convert;</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
