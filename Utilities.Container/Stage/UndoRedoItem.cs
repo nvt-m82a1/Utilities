@@ -10,6 +10,7 @@ namespace Utilities.Container.Stage
     public class UndoRedoItem<T> : BackupItem where T : class
     {
         protected int RedoCount;
+        protected int LatestIndex;
         protected T Item;
 
         public UndoRedoItem(T item, int numberOfBackup) : base(numberOfBackup)
@@ -25,6 +26,8 @@ namespace Utilities.Container.Stage
         {
             var bytes = DataBinding.Instance.ReadMembers(Item);
             this.Add(bytes);
+
+            LatestIndex = Index;
         }
 
         public new bool Add(byte[]? data)
@@ -38,7 +41,7 @@ namespace Utilities.Container.Stage
         /// </summary>
         public void Latest()
         {
-            var bytes = Data[Index];
+            var bytes = Data[LatestIndex];
             DataBinding.Instance.WriteMembers(Item, bytes);
         }
 

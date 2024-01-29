@@ -23,7 +23,7 @@ namespace Utilities
             var bytes2 = DataConvert.Instance.GetBytes(data2);
 
             Console.WriteLine("same bytes output: " + bytes.SequenceEqual(bytes2));
-
+            
             Console.WriteLine();
             Console.WriteLine();
         }

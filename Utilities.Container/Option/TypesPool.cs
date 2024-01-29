@@ -139,7 +139,7 @@ namespace Utilities.Container.Option
                     var isBoolean = target.FullName == FullName.Boolean;
                     if (isBoolean) return new TypeBoolean(target);
 
-                    // Những type trả về là một Iterator
+                    // Type trả về là một Iterator
                     var isIterator = target.Name.EndsWith("Iterator`1");
                     if (isIterator) return new TypeList(typeof(List<>).MakeGenericType(target.GenericTypeArguments[0]), "Add", target.GenericTypeArguments[0]);
 
