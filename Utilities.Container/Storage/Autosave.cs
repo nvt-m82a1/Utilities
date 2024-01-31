@@ -40,6 +40,7 @@ namespace Utilities.Container.Storage
         /// <param name="key">Khóa</param>
         /// <param name="getValue">Hàm lấy dữ liệu</param>
         /// <param name="timeInterval">Thời gian tạo một bản lưu trữ, tính theo giây</param>
+        /// <param name="numberOfBackup">Số lượng bản ghi backup</param>
         public bool Create<T>(string key, Func<T?> getValue, int timeInterval = 10, int numberOfBackup = 1)
         {
             if (mapKey.ContainsKey(key)) return false;
@@ -100,7 +101,6 @@ namespace Utilities.Container.Storage
         /// </summary>
         /// <param name="key">Khóa</param>
         /// <param name="reverseIndex">Số thứ tự</param>
-        /// <returns></returns>
         public T? Get<T>(string key, int reverseIndex = 0)
         {
             return Backup.Get<T>(key, reverseIndex);

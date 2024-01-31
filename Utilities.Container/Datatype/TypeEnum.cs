@@ -7,6 +7,9 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Kiểu dữ liệu Enum
+    /// </summary>
     public class TypeEnum : TypeBase
     {
         public TypeEnum(Type type, Type innerType) : base(type, innerType)

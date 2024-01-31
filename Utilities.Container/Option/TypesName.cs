@@ -1,5 +1,8 @@
 ﻿namespace Utilities.Container.Option
 {
+    /// <summary>
+    /// Tên của những kiểu dữ liệu
+    /// </summary>
     public class TypesName
     {
         /// <summary>

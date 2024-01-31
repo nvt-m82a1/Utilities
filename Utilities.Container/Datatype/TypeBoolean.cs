@@ -5,6 +5,9 @@ using Utilities.Container.Converter;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Kiểu dữ liệu bool
+    /// </summary>
     public class TypeBoolean : TypeBase
     {
         public TypeBoolean(Type type) : base(type)

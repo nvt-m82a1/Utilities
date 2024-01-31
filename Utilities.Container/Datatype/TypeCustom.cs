@@ -6,6 +6,9 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Lưu trữ dữ liệu class
+    /// </summary>
     public class TypeCustom : TypeBase
     {
         protected bool forceClass;

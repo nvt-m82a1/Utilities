@@ -1,5 +1,9 @@
 ﻿namespace Utilities.Container.Base
 {
+    /// <summary>
+    /// Một đối tượng là container
+    /// </summary>
+    /// <typeparam name="TData"></typeparam>
     public interface IContainer<TData>
     {
         /// <summary>

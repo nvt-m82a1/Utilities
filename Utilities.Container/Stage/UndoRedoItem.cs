@@ -4,7 +4,7 @@ using Utilities.Container.Storage;
 namespace Utilities.Container.Stage
 {
     /// <summary>
-    /// Undo và redo một đối tượng trạng thái
+    /// Undo và redo một đối tượng
     /// </summary>
     /// <typeparam name="T">Kiểu dữ liệu</typeparam>
     public class UndoRedoItem<T> : BackupItem where T : class

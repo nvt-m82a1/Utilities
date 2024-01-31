@@ -2,6 +2,10 @@
 
 namespace Utilities.Container.Base
 {
+    /// <summary>
+    /// Mẫu container lưu trữ dữ liệu
+    /// </summary>
+    /// <typeparam name="TSelf"></typeparam>
     public abstract class BaseContainer<TSelf> :
         IContainer<byte>,
         IEquatable<BaseContainer<TSelf>>,
@@ -38,11 +42,19 @@ namespace Utilities.Container.Base
             SubContainers = new List<TSelf>();
         }
 
+        /// <summary>
+        /// Thêm một container
+        /// </summary>
+        /// <param name="container"></param>
         public virtual void AddContainer(TSelf container)
         {
             SubContainers.Add(container);
         }
 
+        /// <summary>
+        /// Đọc một container
+        /// </summary>
+        /// <returns></returns>
         public virtual TSelf? ReadContainer()
         {
             if (SubContainerIter >= SubContainers.Count) return null;
@@ -51,6 +63,9 @@ namespace Utilities.Container.Base
             return container;
         }
 
+        /// <summary>
+        /// Reset thông tin đọc
+        /// </summary>
         public void ReadReset()
         {
             Bits.ReadReset();
@@ -61,6 +76,9 @@ namespace Utilities.Container.Base
             }
         }
 
+        /// <summary>
+        /// Làm rỗng container
+        /// </summary>
         public void Clear()
         {
             Bits.Clear();
@@ -71,6 +89,9 @@ namespace Utilities.Container.Base
             }
         }
 
+        /// <summary>
+        /// Xuất dữ liệu từ container
+        /// </summary>
         public IEnumerable<byte> Export()
         {
             var length = BitConverter.GetBytes(this.TotalExportBytes);
@@ -89,6 +110,11 @@ namespace Utilities.Container.Base
                 .Concat(subContainers);
         }
 
+        /// <summary>
+        /// Nhập dữ liệu vào container
+        /// </summary>
+        /// <param name="buffer">Mảng dữ liệu</param>
+        /// <param name="start">Vị trí bắt đầu</param>
         public int Import(byte[] buffer, int start = 0)
         {
             var length = BitConverter.ToInt32(buffer, start);
@@ -111,11 +137,20 @@ namespace Utilities.Container.Base
             return start + length;
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="other">Container khác</param>
         public bool Equals(BaseContainer<TSelf>? other)
         {
             return this.Equals(this, other);
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="x">Container 1</param>
+        /// <param name="y">Container 2</param>
         public bool Equals(BaseContainer<TSelf>? x, BaseContainer<TSelf>? y)
         {
             if (x == null && y == null) return true;
@@ -128,6 +163,10 @@ namespace Utilities.Container.Base
             return false;
         }
 
+        /// <summary>
+        /// Lấy mã băm
+        /// </summary>
+        /// <param name="obj">Container</param>
         public int GetHashCode([DisallowNull] BaseContainer<TSelf> obj)
         {
             var hashcode = HashCode.Combine(Bits, Bytes, SubContainers);

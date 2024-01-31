@@ -7,6 +7,9 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Kiểu dữ liệu buildin của hệ thống như byte, int, ...
+    /// </summary>
     public class TypeBuildin : TypeBase
     {
         public TypeBuildin(Type type) : base(type)

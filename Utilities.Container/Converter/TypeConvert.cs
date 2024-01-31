@@ -5,6 +5,9 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Converter
 {
+    /// <summary>
+    /// Bộ chuyển đổi dữ liệu
+    /// </summary>
     public class TypeConvert
     {
         public static TypeConvert Instance = new TypeConvert();
