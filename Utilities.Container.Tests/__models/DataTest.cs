@@ -67,6 +67,26 @@ namespace Utilities.Container.Tests.__models
             public event EventHandler<EventArgs> Event1;
             public delegate void OnEvent1();
         }
+
+        public class ForceClass
+        {
+            public int Id;
+            public string Name;
+        }
+
+        public class ForceSkipClass1
+        {
+            [SkipContainer]
+            public int Id;
+        }
+
+        public class ForceSkipClass2
+        {
+            public int Id;
+
+            [SkipContainer]
+            public string Name;
+        }
     }
 
 }

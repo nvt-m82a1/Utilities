@@ -165,6 +165,19 @@ namespace Utilities.Container.Converter.Tests
         }
 
         [TestMethod()]
+        public void ItemToBytesTest_UInt64()
+        {
+            var type = TypesPool.GetInfo(typeof(UInt64));
+            UInt64 data = 987654786956356789;
+
+            var bytes = TypeConvert.Instance.ItemToBytes(type, data);
+            var expected = BitConverter.GetBytes(data);
+
+            Assert.IsTrue(bytes != null);
+            Assert.IsTrue(expected.SequenceEqual(bytes));
+        }
+
+        [TestMethod()]
         public void ItemToBytesTest_Decimal()
         {
             var type = TypesPool.GetInfo(typeof(Decimal));

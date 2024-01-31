@@ -12,6 +12,8 @@ namespace Utilities
         public Data2 g { get; set; }
         public int h;
         public bool[] j;
+        public DataEnum k;
+        public DataEnum[] m;
     }
 
     [ClassContainer]
@@ -19,5 +21,12 @@ namespace Utilities
     {
         public int c;
         public string d;
+    }
+
+    public enum DataEnum : byte
+    {
+        No0 = 0,
+        No1 = 1,
+        No2 = 2,
     }
 }

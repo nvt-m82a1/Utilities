@@ -24,6 +24,7 @@ namespace Utilities.Container.Option.Tests
             Assert.AreEqual(TypesName.FullName.String, typeof(String).FullName);
             Assert.AreEqual(TypesName.FullName.DateTime, typeof(DateTime).FullName);
             Assert.AreEqual(TypesName.FullName.Guid, typeof(Guid).FullName);
+            Assert.AreEqual(TypesName.FullName.Enum, typeof(Enum).FullName);
             Assert.AreEqual(TypesName.FullName.Object, typeof(Object).FullName);
             Assert.AreEqual(TypesName.FullName.Array, typeof(Array).FullName);
         }

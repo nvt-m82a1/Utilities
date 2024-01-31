@@ -8,8 +8,11 @@ namespace Utilities.Container.Datatype
 {
     public class TypeCustom : TypeBase
     {
-        public TypeCustom(Type type) : base(type, type.GenericTypeArguments)
+        protected bool forceClass;
+
+        public TypeCustom(Type type, bool forceClass = false) : base(type, type.GenericTypeArguments)
         {
+            this.forceClass = forceClass;
         }
 
         public override void BindingItem(object wrap, DataContainer container, TypeConvert converter)
@@ -35,7 +38,7 @@ namespace Utilities.Container.Datatype
         public override void Read(DataContainer container, TypeConvert converter, Action<object, object?> OnItemResult)
         {
             var instance = Activator.CreateInstance(this.Info.Type);
-            var members = TypesPool.Scan(this.Info.Type);
+            var members = TypesPool.Scan(this.Info.Type, forceClass);
 
             var innerContainer = container.ReadContainer();
             foreach (var member in members)
@@ -51,7 +54,7 @@ namespace Utilities.Container.Datatype
             if (innerWrap == null) return;
 
             var subContainer = new DataContainer();
-            var members = TypesPool.Scan(innerWrap.GetType());
+            var members = TypesPool.Scan(innerWrap.GetType(), forceClass);
             foreach (var member in members)
             {
                 var memberValue = member.Binding!.GetValue!(innerWrap);

@@ -116,7 +116,7 @@ namespace Utilities.Container.Storage.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(TypeNotfoundException))]
+        [ExpectedException(typeof(TypeConvertException))]
         public void GetTests_index()
         {
             var item1 = 123456;
@@ -142,7 +142,7 @@ namespace Utilities.Container.Storage.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(TypeNotfoundException))]
+        [ExpectedException(typeof(TypeConvertException))]
         public void GetTest_timestamp()
         {
             var item1 = 123456;

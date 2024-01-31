@@ -18,12 +18,14 @@
             public const string Single = "System.Single";
             public const string Double = "System.Double";
             public const string Int64 = "System.Int64";
+            public const string UInt64 = "System.UInt64";
             public const string Decimal = "System.Decimal";
 
             public const string String = "System.String";
             public const string DateTime = "System.DateTime";
             public const string Guid = "System.Guid";
 
+            public const string Enum = "System.Enum";
             public const string Object = "System.Object";
             public const string Array = "System.Array";
         }

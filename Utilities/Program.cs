@@ -14,7 +14,9 @@ namespace Utilities
                 f = 4567867,
                 g = new Data2 { c = 5467867, d = "w65e4r6sdf654" },
                 h = 8665145,
-                j = [true, false, true]
+                j = [true, false, true],
+                k = DataEnum.No1,
+                m = [DataEnum.No1, DataEnum.No2, DataEnum.No0, DataEnum.No1]
             };
 
             var bytes = DataConvert.Instance.GetBytes(data);
@@ -23,7 +25,7 @@ namespace Utilities
             var bytes2 = DataConvert.Instance.GetBytes(data2);
 
             Console.WriteLine("same bytes output: " + bytes.SequenceEqual(bytes2));
-            
+
             Console.WriteLine();
             Console.WriteLine();
         }

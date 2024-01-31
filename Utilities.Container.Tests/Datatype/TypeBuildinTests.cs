@@ -306,6 +306,36 @@ namespace Utilities.Container.Datatype.Tests
         }
 
         [TestMethod()]
+        public void ReadWriteTests_ulong_min()
+        {
+            var item = ulong.MinValue;
+            var bytes = DataConvert.Instance.GetBytes(item);
+            var data = DataConvert.Instance.GetItem<ulong>(bytes);
+
+            Assert.AreEqual(item, data);
+        }
+
+        [TestMethod()]
+        public void ReadWriteTests_ulong_max()
+        {
+            var item = ulong.MaxValue;
+            var bytes = DataConvert.Instance.GetBytes(item);
+            var data = DataConvert.Instance.GetItem<ulong>(bytes);
+
+            Assert.AreEqual(item, data);
+        }
+
+        [TestMethod()]
+        public void ReadWriteTests_ulong_null()
+        {
+            ulong? item = null;
+            var bytes = DataConvert.Instance.GetBytes(item);
+            var data = DataConvert.Instance.GetItem<ulong?>(bytes);
+
+            Assert.AreEqual(item, data);
+        }
+
+        [TestMethod()]
         public void ReadWriteTests_decimal_min()
         {
             var item = decimal.MinValue;

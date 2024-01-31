@@ -1,5 +1,8 @@
 ﻿namespace Utilities.Container.Base
 {
+    /// <summary>
+    /// Container dữ liệu
+    /// </summary>
     public class DataContainer : BaseContainer<DataContainer>
     {
         /// <summary>

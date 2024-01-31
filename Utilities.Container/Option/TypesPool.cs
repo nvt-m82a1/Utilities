@@ -5,6 +5,9 @@ using static Utilities.Container.Option.TypesName;
 
 namespace Utilities.Container.Option
 {
+    /// <summary>
+    /// Danh sách kiểu dữ liệu
+    /// </summary>
     public class TypesPool
     {
         /// <summary>
@@ -16,8 +19,9 @@ namespace Utilities.Container.Option
         /// Quét và lưu danh sách thuộc tính của đối tượng
         /// </summary>
         /// <param name="dataType">Kiểu dữ liệu</param>
+        /// <param name="forceClass">Lấy danh sách members trực tiếp từ class</param>
         /// <returns>Danh sách thông tin dữ liệu chuyển đổi</returns>
-        public static TypeBase[] Scan(Type? dataType)
+        public static TypeBase[] Scan(Type? dataType, bool forceClass = false)
         {
             if (dataType == null) return Array.Empty<TypeBase>();
             var typecode = HashCode.Combine(dataType.GetHashCode(), dataType.FullName);
@@ -26,9 +30,11 @@ namespace Utilities.Container.Option
 
             if (!scanSaved.ContainsKey(typecode))
             {
-                var fields = dataType.GetFields().Select(f =>
+                var fields = dataType.GetFields()
+                    .Where(f => !Attribute.IsDefined(f, typeof(SkipContainerAttribute)))
+                    .Select(f =>
                 {
-                    var type = Create(f.FieldType);
+                    var type = Create(f.FieldType, forceClass);
                     type.Binding = new TypeBinding
                     {
                         GetValue = (obj) => f.GetValue(obj),
@@ -37,9 +43,11 @@ namespace Utilities.Container.Option
                     return type;
                 });
 
-                var props = dataType.GetProperties().Select(p =>
+                var props = dataType.GetProperties()
+                    .Where(p => !Attribute.IsDefined(p, typeof(SkipContainerAttribute)))
+                    .Select(p =>
                 {
-                    var type = Create(p.PropertyType);
+                    var type = Create(p.PropertyType, forceClass);
                     type.Binding = new TypeBinding
                     {
                         GetValue = (obj) => p.GetValue(obj),
@@ -58,16 +66,19 @@ namespace Utilities.Container.Option
         /// Quét và lưu danh sách thuộc tính của đối tượng
         /// </summary>
         /// <typeparam name="T">Kiểu dữ liệu</typeparam>
+        /// <param name="forceClass">Lấy danh sách members trực tiếp từ class</param>
         /// <returns>Danh sách thông tin dữ liệu chuyển đổi</returns>
-        public static TypeBase[] Scan<T>()
+        public static TypeBase[] Scan<T>(bool forceClass = false)
         {
-            return Scan(typeof(T));
+            return Scan(typeof(T), forceClass);
         }
 
         /// <summary>
-        /// Tạo một BaseType từ định dạng Type
+        /// Tạo một TypeBase từ định dạng Type
         /// </summary>
-        public static TypeBase Create(Type target)
+        /// <param name="target">Kiểu dữ liệu</param>
+        /// <param name="forceClass">Lấy danh sách members trực tiếp từ class</param>
+        public static TypeBase Create(Type target, bool forceClass = false)
         {
             switch (target.Name)
             {
@@ -132,9 +143,15 @@ namespace Utilities.Container.Option
                             return type;
                         }
                     }
+                    else if (target.BaseType?.FullName == FullName.Enum)
+                    {
+                        var type = new TypeEnum(target, target.GetEnumUnderlyingType());
+                        type.Info.IsEnum = true;
+                        return type;
+                    }
 
-                    var isCustom = Attribute.IsDefined(target, typeof(ClassContainerAttribute));
-                    if (isCustom) return new TypeCustom(target);
+                    var isClassContainer = Attribute.IsDefined(target, typeof(ClassContainerAttribute));
+                    if (isClassContainer) return new TypeCustom(target, forceClass);
 
                     var isBoolean = target.FullName == FullName.Boolean;
                     if (isBoolean) return new TypeBoolean(target);
@@ -143,10 +160,34 @@ namespace Utilities.Container.Option
                     var isIterator = target.Name.EndsWith("Iterator`1");
                     if (isIterator) return new TypeList(typeof(List<>).MakeGenericType(target.GenericTypeArguments[0]), "Add", target.GenericTypeArguments[0]);
 
-                    return new TypeBuildin(target);
-            }
+                    if (!forceClass) return new TypeBuildin(target);
+                    else
+                    {
+                        switch (target.FullName)
+                        {
+                            case FullName.Boolean:
+                            case FullName.Byte:
+                            case FullName.SByte:
+                            case FullName.Char:
+                            case FullName.Int16:
+                            case FullName.UInt16:
+                            case FullName.Int32:
+                            case FullName.UInt32:
+                            case FullName.Single:
+                            case FullName.Double:
+                            case FullName.Int64:
+                            case FullName.Decimal:
+                            case FullName.String:
+                            case FullName.DateTime:
+                            case FullName.Guid:
+                                return new TypeBuildin(target);
+                        }
 
-            throw new TypeNotfoundException(target.FullName ?? target.Name);
+                        return new TypeCustom(target, forceClass);
+                    }
+
+                    throw new TypeNotfoundException(target.FullName ?? target.Name);
+            }
         }
 
         /// <summary>

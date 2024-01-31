@@ -139,6 +139,17 @@ namespace Utilities.Container.Converter.Tests
         }
 
         [TestMethod()]
+        public void ItemToBytesTest_UInt64()
+        {
+            TypeInfo ctype = TypesPool.GetInfo(typeof(UInt64));
+            UInt64? data = null;
+
+            var bytes = TypeConvert.Instance.ItemToBytes(ctype, data);
+
+            Assert.IsTrue(bytes == null);
+        }
+
+        [TestMethod()]
         public void ItemToBytesTest_Decimal()
         {
             TypeInfo ctype = TypesPool.GetInfo(typeof(Decimal));

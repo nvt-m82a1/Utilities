@@ -48,6 +48,9 @@ namespace Utilities.Container.Base
         protected int ArrayIter;
         // End Read
 
+        /// <summary>
+        /// Khởi tạo container
+        /// </summary>
         public ByteContainer()
         {
             Items = new List<byte>();
@@ -169,6 +172,9 @@ namespace Utilities.Container.Base
             }
         }
 
+        /// <summary>
+        /// Reset thông tin đọc
+        /// </summary>
         public void ReadReset()
         {
             ItemIter = 0;
@@ -177,6 +183,9 @@ namespace Utilities.Container.Base
             ArrayIter = 0;
         }
 
+        /// <summary>
+        /// Làm rỗng container
+        /// </summary>
         public void Clear()
         {
             Items.Clear();
@@ -186,6 +195,9 @@ namespace Utilities.Container.Base
             ReadReset();
         }
 
+        /// <summary>
+        /// Xuất dữ liệu từ container
+        /// </summary>
         public IEnumerable<byte> Export()
         {
             var length = BitConverter.GetBytes(this.TotalExportBytes);
@@ -204,6 +216,11 @@ namespace Utilities.Container.Base
                 .Concat(Arrays.SelectMany(x => x));
         }
 
+        /// <summary>
+        /// Nhập dữ liệu vào container
+        /// </summary>
+        /// <param name="buffer">Mảng dữ liệu</param>
+        /// <param name="start">Vị trí bắt đầu</param>
         public int Import(byte[] buffer, int start = 0)
         {
             int length = BitConverter.ToInt32(buffer, start);
@@ -263,11 +280,20 @@ namespace Utilities.Container.Base
             return start + length;
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="other">Container khác</param>
         public bool Equals(ByteContainer? other)
         {
             return Equals(this, other);
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="x">Container 1</param>
+        /// <param name="y">Container 2</param>
         public bool Equals(ByteContainer? x, ByteContainer? y)
         {
             if (x == null && y == null) return true;
@@ -289,6 +315,10 @@ namespace Utilities.Container.Base
             return false;
         }
 
+        /// <summary>
+        /// Lấy mã băm
+        /// </summary>
+        /// <param name="obj">Container</param>
         public int GetHashCode([DisallowNull] ByteContainer obj)
         {
             var hashcode = HashCode.Combine(Items, Bits, ArraySizes, Arrays);

@@ -20,6 +20,7 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/nvt-m82a1/Utilities</RepositoryUrl>
 		<PackageTags>Data convert;</PackageTags>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

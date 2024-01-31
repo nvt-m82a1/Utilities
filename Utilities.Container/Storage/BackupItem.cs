@@ -81,7 +81,7 @@ namespace Utilities.Container.Storage
         /// <summary>
         /// Lấy một bản
         /// </summary>
-        /// <param name="reverseIndex">Số thứ tự, 0 là bản nhất</param>
+        /// <param name="reverseIndex">Số thứ tự, 0 là bản mới nhất</param>
         /// <returns>Dữ liệu</returns>
         public byte[]? Get(int reverseIndex)
         {

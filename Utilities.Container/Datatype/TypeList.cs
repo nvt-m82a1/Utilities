@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using System.Reflection;
 using Utilities.Container.Base;
 using Utilities.Container.BaseType;
 using Utilities.Container.Converter;
@@ -7,15 +8,16 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Kiểu dữ liệu danh sách
+    /// </summary>
     public class TypeList : TypeBase
     {
-        protected Type WrapType;
-        protected string AddMethodName;
+        protected MethodInfo? AddMethod;
 
         public TypeList(Type wrapType, string addMethodName, Type dataType) : base(wrapType, dataType)
         {
-            this.WrapType = wrapType;
-            this.AddMethodName = addMethodName;
+            this.AddMethod = Info.Type.GetMethod(addMethodName, [dataType]);
         }
 
         public override void BindingItem(object wrap, DataContainer container, TypeConvert converter)
@@ -38,7 +40,7 @@ namespace Utilities.Container.Datatype
                     }
                     else
                     {
-                        var list = Activator.CreateInstance(WrapType);
+                        var list = Activator.CreateInstance(Info.Type);
                         Binding.SetValue.Invoke(wrap, list);
                         return;
                     }
@@ -67,14 +69,21 @@ namespace Utilities.Container.Datatype
 
             var (len, bytes) = container.ReadArray();
 
-            var listWrap = Activator.CreateInstance(WrapType)!;
-            var addMethod = WrapType.GetMethod(this.AddMethodName);
-            Action<object, object?> actionAddItem = (item, index) => addMethod!.Invoke(listWrap, [item]);
+            var listWrap = Activator.CreateInstance(Info.Type)!;
+            Action<object, object?> actionAddItem = (item, index) => AddMethod!.Invoke(listWrap, [item]);
 
             if (Others![0].Info.IsContainer)
             {
                 for (var i = 0; i < length; i++)
                     Others![0].Read(container, converter, actionAddItem);
+            }
+            else if (Others![0].Info.IsEnum)
+            {
+                var items = converter.BytesToArray(Others![0].Others![0].Info, length, bytes!.ToArray(), 0);
+                foreach (var item in (IEnumerable)items!)
+                {
+                    actionAddItem.Invoke(Enum.ToObject(Others![0].Info.Type, item), null);
+                }
             }
             else
             {
@@ -85,7 +94,7 @@ namespace Utilities.Container.Datatype
 
             if (Info.IsArray)
             {
-                var toArrayMethod = WrapType.GetMethod("ToArray");
+                var toArrayMethod = Info.Type.GetMethod("ToArray");
                 var arr = toArrayMethod!.Invoke(listWrap, null);
                 OnItemResult?.Invoke(arr!, length);
             }
@@ -114,6 +123,11 @@ namespace Utilities.Container.Datatype
             {
                 foreach (var item in list)
                     this.Others![0].Write(item, container, converter);
+            }
+            else if (Others![0].Info.IsEnum)
+            {
+                var itemsByte = converter.ArrayToBytes(Others![0].Others![0].Info, list).SelectMany(x => x);
+                container.AddArray(itemsByte);
             }
             else
             {

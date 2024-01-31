@@ -113,6 +113,9 @@ namespace Utilities.Container.Base
             return data;
         }
 
+        /// <summary>
+        /// Reset thông tin đọc
+        /// </summary>
         public void ReadReset()
         {
             ReadTotal = 0;
@@ -120,6 +123,9 @@ namespace Utilities.Container.Base
             ReadOffset = 0;
         }
 
+        /// <summary>
+        /// Làm rỗng container
+        /// </summary>
         public void Clear()
         {
             Total = 0;
@@ -129,6 +135,9 @@ namespace Utilities.Container.Base
             ReadReset();
         }
 
+        /// <summary>
+        /// Xuất dữ liệu từ container
+        /// </summary>
         public IEnumerable<byte> Export()
         {
             byte length = (byte)this.TotalExportBytes;
@@ -138,6 +147,11 @@ namespace Utilities.Container.Base
                 return [length, Offset, .. Data];
         }
 
+        /// <summary>
+        /// Nhập dữ liệu vào container
+        /// </summary>
+        /// <param name="buffer">Mảng dữ liệu</param>
+        /// <param name="start">Vị trí bắt đầu</param>
         public int Import(byte[] buffer, int start = 0)
         {
             byte length = buffer[start + 0];
@@ -160,11 +174,20 @@ namespace Utilities.Container.Base
             return start + length;
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="other">Container khác</param>
         public bool Equals(BitContainer? other)
         {
             return Equals(this, other);
         }
 
+        /// <summary>
+        /// Kiểm tra bằng
+        /// </summary>
+        /// <param name="x">Container 1</param>
+        /// <param name="y">Container 2</param>
         public bool Equals(BitContainer? x, BitContainer? y)
         {
             if (x == null && y == null) return true;
@@ -176,6 +199,10 @@ namespace Utilities.Container.Base
             return false;
         }
 
+        /// <summary>
+        /// Lấy mã băm
+        /// </summary>
+        /// <param name="obj">Container</param>
         public int GetHashCode([DisallowNull] BitContainer obj)
         {
             var hashcode = HashCode.Combine(Offset, Data, Data.Count);

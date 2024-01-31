@@ -7,6 +7,9 @@ using Utilities.Container.Option;
 
 namespace Utilities.Container.Datatype
 {
+    /// <summary>
+    /// Kiểu dữ liệu Key - Value
+    /// </summary>
     public class TypePair : TypeBase
     {
         public TypePair(Type type) : base(type, type.GenericTypeArguments)

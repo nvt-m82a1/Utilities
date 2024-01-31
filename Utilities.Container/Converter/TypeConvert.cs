@@ -53,6 +53,9 @@ namespace Utilities.Container.Converter
                 case TypesName.FullName.Int64:
                     return BitConverter.GetBytes((long)data);
 
+                case TypesName.FullName.UInt64:
+                    return BitConverter.GetBytes((ulong)data);
+
                 case TypesName.FullName.Decimal:
                     {
                         var ints = decimal.GetBits((decimal)data);
@@ -77,7 +80,7 @@ namespace Utilities.Container.Converter
                     return ((Guid)data).ToByteArray();
             }
 
-            throw new TypeNotfoundException(message: type.FullName);
+            throw new TypeConvertException(message: type.FullName);
         }
 
         /// <summary>
@@ -175,6 +178,12 @@ namespace Utilities.Container.Converter
                                 .Select(i => BitConverter.ToInt64(buffer!, offset + i * sizeof(long)));
                     }
 
+                case TypesName.FullName.UInt64:
+                    {
+                        return Enumerable.Range(0, length)
+                                .Select(i => BitConverter.ToUInt64(buffer!, offset + i * sizeof(ulong)));
+                    }
+
                 case TypesName.FullName.Decimal:
                     {
                         return Enumerable.Range(0, length)
@@ -218,7 +227,7 @@ namespace Utilities.Container.Converter
                     }
 
                 default:
-                    throw new TypeNotfoundException(message: type.FullName);
+                    throw new TypeConvertException(message: type.FullName);
             }
         }
 

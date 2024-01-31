@@ -64,18 +64,18 @@ namespace Utilities.Container.Storage
                 {
                     while (await newTimer.WaitForNextTickAsync(cts.Token))
                     {
-                        if (newList.Count == 0)
-                        {
-                            mapTimer.TryRemove(timerPair);
-                            newTimer.Dispose();
-                            break;
-                        }
-
                         for (var i = 0; i < newList.Count; i++)
                         {
                             var (itemTimeInterval, itemActionGetValue) = mapKey[newList[i]];
                             var itemValue = itemActionGetValue.Invoke();
                             Backup.Add(newList[i], itemValue);
+                        }
+
+                        if (newList.Count == 0)
+                        {
+                            mapTimer.TryRemove(timerPair);
+                            newTimer.Dispose();
+                            break;
                         }
                     }
                 });

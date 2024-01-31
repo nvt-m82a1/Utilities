@@ -3,7 +3,7 @@
 namespace Utilities.Container.Datatype.Tests
 {
     [TestClass()]
-    public class TypeListTests
+    public class TypeListBuildinTests
     {
         [TestMethod()]
         public void ReadWriteTests_empty()
@@ -247,6 +247,28 @@ namespace Utilities.Container.Datatype.Tests
         }
 
         [TestMethod()]
+        public void ReadWriteTests_list_ulong()
+        {
+            List<ulong> item = new List<ulong> { 3544652348235446235UL, 4468243654426384623UL, 6523446523445UL, 5624346253446253UL };
+            var bytes = DataConvert.Instance.GetBytes(item);
+            var data = DataConvert.Instance.GetItem<List<ulong>>(bytes);
+
+            Assert.IsNotNull(data);
+            Assert.IsTrue(item.SequenceEqual(data));
+        }
+
+        [TestMethod()]
+        public void ReadWriteTests_array_ulong()
+        {
+            ulong[] item = [2365446523445UL, 9823465426354UL, 2563446238445623446UL, 62534465234UL];
+            var bytes = DataConvert.Instance.GetBytes(item);
+            var data = DataConvert.Instance.GetItem<ulong[]>(bytes);
+
+            Assert.IsNotNull(data);
+            Assert.IsTrue(item.SequenceEqual(data));
+        }
+
+        [TestMethod()]
         public void ReadWriteTests_list_decimal()
         {
             List<decimal> item = new List<decimal> { 56562354453M, 5645234.4625374M, 56234465423654.46253448623445623M, 5624346542.44625344826534652344652M };
@@ -333,6 +355,5 @@ namespace Utilities.Container.Datatype.Tests
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
         }
-
     }
 }
