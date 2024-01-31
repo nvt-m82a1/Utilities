@@ -9,9 +9,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_empty()
         {
-            var item = new List<BindingTest.EnumByte>();
+            var item = new List<DataTest.EnumByte>();
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumByte>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumByte>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.AreEqual(item.Count, data.Count);
@@ -20,9 +20,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_null()
         {
-            List<BindingTest.EnumByte>? item = null;
+            List<DataTest.EnumByte>? item = null;
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumByte>?>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumByte>?>(bytes);
 
             Assert.AreEqual(item, data);
         }
@@ -30,9 +30,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumByte()
         {
-            List<BindingTest.EnumByte> item = new List<BindingTest.EnumByte> { BindingTest.EnumByte.Item1, BindingTest.EnumByte.Item2, BindingTest.EnumByte.Item0, BindingTest.EnumByte.Item1 };
+            List<DataTest.EnumByte> item = new List<DataTest.EnumByte> { DataTest.EnumByte.Item1, DataTest.EnumByte.Item2, DataTest.EnumByte.Item0, DataTest.EnumByte.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumByte>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumByte>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -41,9 +41,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumByte()
         {
-            BindingTest.EnumByte[] item = [BindingTest.EnumByte.Item2, BindingTest.EnumByte.Item1, BindingTest.EnumByte.Item0, BindingTest.EnumByte.Item1];
+            DataTest.EnumByte[] item = [DataTest.EnumByte.Item2, DataTest.EnumByte.Item1, DataTest.EnumByte.Item0, DataTest.EnumByte.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumByte[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumByte[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -51,9 +51,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumSByte()
         {
-            List<BindingTest.EnumSByte> item = new List<BindingTest.EnumSByte> { BindingTest.EnumSByte.Item1, BindingTest.EnumSByte.Item2, BindingTest.EnumSByte.Item0, BindingTest.EnumSByte.Item1 };
+            List<DataTest.EnumSByte> item = new List<DataTest.EnumSByte> { DataTest.EnumSByte.Item1, DataTest.EnumSByte.Item2, DataTest.EnumSByte.Item0, DataTest.EnumSByte.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumSByte>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumSByte>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -62,9 +62,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumSByte()
         {
-            BindingTest.EnumSByte[] item = [BindingTest.EnumSByte.Item2, BindingTest.EnumSByte.Item1, BindingTest.EnumSByte.Item0, BindingTest.EnumSByte.Item1];
+            DataTest.EnumSByte[] item = [DataTest.EnumSByte.Item2, DataTest.EnumSByte.Item1, DataTest.EnumSByte.Item0, DataTest.EnumSByte.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumSByte[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumSByte[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -73,9 +73,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumInt16()
         {
-            List<BindingTest.EnumInt16> item = new List<BindingTest.EnumInt16> { BindingTest.EnumInt16.Item1, BindingTest.EnumInt16.Item2, BindingTest.EnumInt16.Item0, BindingTest.EnumInt16.Item1 };
+            List<DataTest.EnumInt16> item = new List<DataTest.EnumInt16> { DataTest.EnumInt16.Item1, DataTest.EnumInt16.Item2, DataTest.EnumInt16.Item0, DataTest.EnumInt16.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumInt16>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumInt16>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -84,9 +84,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumInt16()
         {
-            BindingTest.EnumInt16[] item = [BindingTest.EnumInt16.Item2, BindingTest.EnumInt16.Item1, BindingTest.EnumInt16.Item0, BindingTest.EnumInt16.Item1];
+            DataTest.EnumInt16[] item = [DataTest.EnumInt16.Item2, DataTest.EnumInt16.Item1, DataTest.EnumInt16.Item0, DataTest.EnumInt16.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumInt16[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumInt16[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -95,9 +95,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumInt32()
         {
-            List<BindingTest.EnumInt32> item = new List<BindingTest.EnumInt32> { BindingTest.EnumInt32.Item1, BindingTest.EnumInt32.Item2, BindingTest.EnumInt32.Item0, BindingTest.EnumInt32.Item1 };
+            List<DataTest.EnumInt32> item = new List<DataTest.EnumInt32> { DataTest.EnumInt32.Item1, DataTest.EnumInt32.Item2, DataTest.EnumInt32.Item0, DataTest.EnumInt32.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumInt32>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumInt32>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -106,9 +106,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumInt32()
         {
-            BindingTest.EnumInt32[] item = [BindingTest.EnumInt32.Item2, BindingTest.EnumInt32.Item1, BindingTest.EnumInt32.Item0, BindingTest.EnumInt32.Item1];
+            DataTest.EnumInt32[] item = [DataTest.EnumInt32.Item2, DataTest.EnumInt32.Item1, DataTest.EnumInt32.Item0, DataTest.EnumInt32.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumInt32[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumInt32[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -117,9 +117,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumInt64()
         {
-            List<BindingTest.EnumInt64> item = new List<BindingTest.EnumInt64> { BindingTest.EnumInt64.Item1, BindingTest.EnumInt64.Item2, BindingTest.EnumInt64.Item0, BindingTest.EnumInt64.Item1 };
+            List<DataTest.EnumInt64> item = new List<DataTest.EnumInt64> { DataTest.EnumInt64.Item1, DataTest.EnumInt64.Item2, DataTest.EnumInt64.Item0, DataTest.EnumInt64.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumInt64>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumInt64>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -128,9 +128,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumInt64()
         {
-            BindingTest.EnumInt64[] item = [BindingTest.EnumInt64.Item2, BindingTest.EnumInt64.Item1, BindingTest.EnumInt64.Item0, BindingTest.EnumInt64.Item1];
+            DataTest.EnumInt64[] item = [DataTest.EnumInt64.Item2, DataTest.EnumInt64.Item1, DataTest.EnumInt64.Item0, DataTest.EnumInt64.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumInt64[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumInt64[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -139,9 +139,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumUInt16()
         {
-            List<BindingTest.EnumUInt16> item = new List<BindingTest.EnumUInt16> { BindingTest.EnumUInt16.Item1, BindingTest.EnumUInt16.Item2, BindingTest.EnumUInt16.Item0, BindingTest.EnumUInt16.Item1 };
+            List<DataTest.EnumUInt16> item = new List<DataTest.EnumUInt16> { DataTest.EnumUInt16.Item1, DataTest.EnumUInt16.Item2, DataTest.EnumUInt16.Item0, DataTest.EnumUInt16.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumUInt16>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumUInt16>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -150,9 +150,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumUInt16()
         {
-            BindingTest.EnumUInt16[] item = [BindingTest.EnumUInt16.Item2, BindingTest.EnumUInt16.Item1, BindingTest.EnumUInt16.Item0, BindingTest.EnumUInt16.Item1];
+            DataTest.EnumUInt16[] item = [DataTest.EnumUInt16.Item2, DataTest.EnumUInt16.Item1, DataTest.EnumUInt16.Item0, DataTest.EnumUInt16.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumUInt16[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumUInt16[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -161,9 +161,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumUInt32()
         {
-            List<BindingTest.EnumUInt32> item = new List<BindingTest.EnumUInt32> { BindingTest.EnumUInt32.Item1, BindingTest.EnumUInt32.Item2, BindingTest.EnumUInt32.Item0, BindingTest.EnumUInt32.Item1 };
+            List<DataTest.EnumUInt32> item = new List<DataTest.EnumUInt32> { DataTest.EnumUInt32.Item1, DataTest.EnumUInt32.Item2, DataTest.EnumUInt32.Item0, DataTest.EnumUInt32.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumUInt32>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumUInt32>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -172,9 +172,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumUInt32()
         {
-            BindingTest.EnumUInt32[] item = [BindingTest.EnumUInt32.Item2, BindingTest.EnumUInt32.Item1, BindingTest.EnumUInt32.Item0, BindingTest.EnumUInt32.Item1];
+            DataTest.EnumUInt32[] item = [DataTest.EnumUInt32.Item2, DataTest.EnumUInt32.Item1, DataTest.EnumUInt32.Item0, DataTest.EnumUInt32.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumUInt32[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumUInt32[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -183,9 +183,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_list_EnumUInt64()
         {
-            List<BindingTest.EnumUInt64> item = new List<BindingTest.EnumUInt64> { BindingTest.EnumUInt64.Item1, BindingTest.EnumUInt64.Item2, BindingTest.EnumUInt64.Item0, BindingTest.EnumUInt64.Item1 };
+            List<DataTest.EnumUInt64> item = new List<DataTest.EnumUInt64> { DataTest.EnumUInt64.Item1, DataTest.EnumUInt64.Item2, DataTest.EnumUInt64.Item0, DataTest.EnumUInt64.Item1 };
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<List<BindingTest.EnumUInt64>>(bytes);
+            var data = DataConvert.Instance.GetItem<List<DataTest.EnumUInt64>>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));
@@ -194,9 +194,9 @@ namespace Utilities.Container.Datatype.Tests
         [TestMethod()]
         public void ReadWriteTests_array_EnumUInt64()
         {
-            BindingTest.EnumUInt64[] item = [BindingTest.EnumUInt64.Item2, BindingTest.EnumUInt64.Item1, BindingTest.EnumUInt64.Item0, BindingTest.EnumUInt64.Item1];
+            DataTest.EnumUInt64[] item = [DataTest.EnumUInt64.Item2, DataTest.EnumUInt64.Item1, DataTest.EnumUInt64.Item0, DataTest.EnumUInt64.Item1];
             var bytes = DataConvert.Instance.GetBytes(item);
-            var data = DataConvert.Instance.GetItem<BindingTest.EnumUInt64[]>(bytes);
+            var data = DataConvert.Instance.GetItem<DataTest.EnumUInt64[]>(bytes);
 
             Assert.IsNotNull(data);
             Assert.IsTrue(item.SequenceEqual(data));

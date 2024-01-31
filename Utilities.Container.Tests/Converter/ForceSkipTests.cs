@@ -39,6 +39,31 @@ namespace Utilities.Container.Converter.Tests
         }
 
         [TestMethod]
+        public void ForceClassTest_inner()
+        {
+            var data = new DataTest.ForceSkipClass3
+            {
+                Id = 1,
+                Class2 = new DataTest.ForceSkipClass2 { Id = 2, Name = "Inner class 2" },
+                Class2Skip = new DataTest.ForceSkipClass2 { Id = 3, Name = "Inner class 2 skip" },
+                Name = "forceclass"
+            };
+
+            var bytes = DataConvert.Instance.GetBytes(data, true);
+            Assert.IsNotNull(bytes);
+
+            var item = DataConvert.Instance.GetItem<DataTest.ForceSkipClass3>(bytes, true);
+            Assert.IsNotNull(item);
+
+            Assert.AreEqual(data.Id, item.Id);
+            Assert.AreEqual(data.Class2.Id, item.Class2.Id);
+
+            Assert.IsNull(item.Class2.Name);
+            Assert.IsNull(item.Class2Skip);
+            Assert.IsNull(item.Name);
+        }
+
+        [TestMethod]
         public void SkipTest_empty()
         {
             var data = new DataTest.ForceSkipClass1 { Id = 1 };
@@ -70,7 +95,7 @@ namespace Utilities.Container.Converter.Tests
 
             data.Id = 2;
             data.Name = "forceclass2";
-            
+
             DataBinding.Instance.WriteMembers(data, bytes, true);
 
             Assert.AreEqual(1, data.Id);

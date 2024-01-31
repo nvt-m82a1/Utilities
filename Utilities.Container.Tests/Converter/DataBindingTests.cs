@@ -104,14 +104,14 @@ namespace Utilities.Container.Converter.Tests
                 DateTime = date,
                 Guid = guid,
 
-                EnumByte = BindingTest.EnumByte.Item1,
-                EnumSByte = BindingTest.EnumSByte.Item1,
-                EnumInt16 = BindingTest.EnumInt16.Item1,
-                EnumInt32 = BindingTest.EnumInt32.Item1,
-                EnumInt64 = BindingTest.EnumInt64.Item1,
-                EnumUInt16 = BindingTest.EnumUInt16.Item1,
-                EnumUInt32 = BindingTest.EnumUInt32.Item1,
-                EnumUInt64 = BindingTest.EnumUInt64.Item1,
+                EnumByte = DataTest.EnumByte.Item1,
+                EnumSByte = DataTest.EnumSByte.Item1,
+                EnumInt16 = DataTest.EnumInt16.Item1,
+                EnumInt32 = DataTest.EnumInt32.Item1,
+                EnumInt64 = DataTest.EnumInt64.Item1,
+                EnumUInt16 = DataTest.EnumUInt16.Item1,
+                EnumUInt32 = DataTest.EnumUInt32.Item1,
+                EnumUInt64 = DataTest.EnumUInt64.Item1,
             };
             var bytes = DataBinding.Instance.ReadMembers(item);
 
@@ -130,14 +130,14 @@ namespace Utilities.Container.Converter.Tests
             item.String = "54sd5f65ew4f";
             item.DateTime = DateTime.Now;
             item.Guid = Guid.NewGuid();
-            item.EnumByte = BindingTest.EnumByte.Item0;
-            item.EnumSByte = BindingTest.EnumSByte.Item0;
-            item.EnumInt16 = BindingTest.EnumInt16.Item0;
-            item.EnumInt32 = BindingTest.EnumInt32.Item0;
-            item.EnumInt64 = BindingTest.EnumInt64.Item0;
-            item.EnumUInt16 = BindingTest.EnumUInt16.Item0;
-            item.EnumUInt32 = BindingTest.EnumUInt32.Item0;
-            item.EnumUInt64 = BindingTest.EnumUInt64.Item0;
+            item.EnumByte = DataTest.EnumByte.Item0;
+            item.EnumSByte = DataTest.EnumSByte.Item0;
+            item.EnumInt16 = DataTest.EnumInt16.Item0;
+            item.EnumInt32 = DataTest.EnumInt32.Item0;
+            item.EnumInt64 = DataTest.EnumInt64.Item0;
+            item.EnumUInt16 = DataTest.EnumUInt16.Item0;
+            item.EnumUInt32 = DataTest.EnumUInt32.Item0;
+            item.EnumUInt64 = DataTest.EnumUInt64.Item0;
 
             DataBinding.Instance.WriteMembers(item, bytes);
             Assert.AreEqual(true, item.Boolean);
@@ -155,14 +155,14 @@ namespace Utilities.Container.Converter.Tests
             Assert.AreEqual("a5s4df68we654f6a5sdf6asdf654", item.String);
             Assert.AreEqual(date, item.DateTime);
             Assert.AreEqual(guid, item.Guid);
-            Assert.AreEqual(BindingTest.EnumByte.Item1, item.EnumByte);
-            Assert.AreEqual(BindingTest.EnumSByte.Item1, item.EnumSByte);
-            Assert.AreEqual(BindingTest.EnumInt16.Item1, item.EnumInt16);
-            Assert.AreEqual(BindingTest.EnumInt32.Item1, item.EnumInt32);
-            Assert.AreEqual(BindingTest.EnumInt64.Item1, item.EnumInt64);
-            Assert.AreEqual(BindingTest.EnumUInt16.Item1, item.EnumUInt16);
-            Assert.AreEqual(BindingTest.EnumUInt32.Item1, item.EnumUInt32);
-            Assert.AreEqual(BindingTest.EnumUInt64.Item1, item.EnumUInt64);
+            Assert.AreEqual(DataTest.EnumByte.Item1, item.EnumByte);
+            Assert.AreEqual(DataTest.EnumSByte.Item1, item.EnumSByte);
+            Assert.AreEqual(DataTest.EnumInt16.Item1, item.EnumInt16);
+            Assert.AreEqual(DataTest.EnumInt32.Item1, item.EnumInt32);
+            Assert.AreEqual(DataTest.EnumInt64.Item1, item.EnumInt64);
+            Assert.AreEqual(DataTest.EnumUInt16.Item1, item.EnumUInt16);
+            Assert.AreEqual(DataTest.EnumUInt32.Item1, item.EnumUInt32);
+            Assert.AreEqual(DataTest.EnumUInt64.Item1, item.EnumUInt64);
         }
 
         [TestMethod()]
@@ -186,14 +186,14 @@ namespace Utilities.Container.Converter.Tests
             item.String = "54sd5f65ew4f";
             item.DateTime = DateTime.Now;
             item.Guid = Guid.NewGuid();
-            item.EnumByte = BindingTest.EnumByte.Item0;
-            item.EnumSByte = BindingTest.EnumSByte.Item0;
-            item.EnumInt16 = BindingTest.EnumInt16.Item0;
-            item.EnumInt32 = BindingTest.EnumInt32.Item0;
-            item.EnumInt64 = BindingTest.EnumInt64.Item0;
-            item.EnumUInt16 = BindingTest.EnumUInt16.Item0;
-            item.EnumUInt32 = BindingTest.EnumUInt32.Item0;
-            item.EnumUInt64 = BindingTest.EnumUInt64.Item0;
+            item.EnumByte = DataTest.EnumByte.Item0;
+            item.EnumSByte = DataTest.EnumSByte.Item0;
+            item.EnumInt16 = DataTest.EnumInt16.Item0;
+            item.EnumInt32 = DataTest.EnumInt32.Item0;
+            item.EnumInt64 = DataTest.EnumInt64.Item0;
+            item.EnumUInt16 = DataTest.EnumUInt16.Item0;
+            item.EnumUInt32 = DataTest.EnumUInt32.Item0;
+            item.EnumUInt64 = DataTest.EnumUInt64.Item0;
 
             DataBinding.Instance.WriteMembers(item, bytes);
             Assert.AreEqual(null, item.Boolean);
