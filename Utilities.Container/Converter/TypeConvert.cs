@@ -16,7 +16,7 @@ namespace Utilities.Container.Converter
         /// <summary>
         /// Chuyển dữ liệu sang định dạng bytes
         /// </summary>
-        /// <exception cref="TypeNotfoundException"></exception>
+        /// <exception cref="TypeConvertException"></exception>
         public byte[]? ItemToBytes(TypeInfo type, object? data)
         {
             if (data == null) return null;
@@ -89,7 +89,7 @@ namespace Utilities.Container.Converter
         /// <summary>
         /// Chuyển mảng sang định dạng byte
         /// </summary>
-        /// <exception cref="TypeNotfoundException"></exception>
+        /// <exception cref="TypeConvertException"></exception>
         public IEnumerable<byte[]> ArrayToBytes(TypeInfo type, object? arr)
         {
             if (arr == null || arr is not IEnumerable) yield break;
@@ -108,7 +108,7 @@ namespace Utilities.Container.Converter
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <returns>IEnumerable?</returns>
-        /// <exception cref="TypeNotfoundException"></exception>
+        /// <exception cref="TypeConvertException"></exception>
         public object? BytesToArray(TypeInfo type, int length, byte[]? buffer, int offset)
         {
             if (buffer == null) return null;
