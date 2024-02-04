@@ -16,15 +16,17 @@ namespace Utilities.Container.Converter
         /// </summary>
         /// <typeparam name="T">Kiểu dữ liệu</typeparam>
         /// <param name="item">Đối tượng</param>
-        /// <param name="forceClass">Lấy danh sách members trực tiếp nếu là class</param>
-        public byte[]? ReadMembers<T>(T item, bool forceClass = false) where T : class
+        public byte[]? ReadMembers<T>(T item) where T : class
         {
             if (item == null) return null;
 
+            ReferencesPool refsPool = new();
+            refsPool.FindValue(item);
+
             var container = new DataContainer();
-            var dataTypes = TypesPool.Scan(item.GetType(), forceClass);
+            var dataTypes = TypesPool.Scan(item.GetType());
             foreach (var type in dataTypes)
-                type.BindingContainer(item, container, TypeConvert.Instance);
+                type.BindingContainer(item, container, TypeConvert.Instance, refsPool);
 
             return container.Export().ToArray();
         }
@@ -35,17 +37,19 @@ namespace Utilities.Container.Converter
         /// <typeparam name="T">Kiểu dữ liệu</typeparam>
         /// <param name="item">Đối tượng</param>
         /// <param name="data">Dữ liệu</param>
-        /// <param name="forceClass">Lấy danh sách members trực tiếp nếu là class</param>
-        public void WriteMembers<T>(T item, byte[]? data, bool forceClass = false) where T : class
+        public void WriteMembers<T>(T item, byte[]? data) where T : class
         {
             if (data == null) return;
+
+            ReferencesPool refsPool = new();
+            refsPool.FindValue(item);
 
             var container = new DataContainer();
             container.Import(data);
 
-            var dataTypes = TypesPool.Scan<T>(forceClass);
+            var dataTypes = TypesPool.Scan<T>();
             foreach (var type in dataTypes)
-                type.BindingItem(item, container, TypeConvert.Instance);
+                type.BindingItem(item, container, TypeConvert.Instance, refsPool);
         }
     }
 }

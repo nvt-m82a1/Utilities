@@ -9,9 +9,7 @@
 
         public string FullName { get; set; }
         public bool IsNullable { get; set; }
-        public bool IsContainer { get; set; }
         public bool IsArray { get; set; }
-        public bool IsEnum { get; set; }
 
         public TypeInfo(Type type)
         {

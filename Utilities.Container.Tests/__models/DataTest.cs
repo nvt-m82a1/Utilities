@@ -4,20 +4,17 @@ namespace Utilities.Container.Tests.__models
 {
     internal class DataTest
     {
-        [ClassContainer]
         public class Item1
         {
             public int Id { get; set; }
         }
 
-        [ClassContainer]
         public class Item2
         {
             public int Id { get; set; }
             public string? Name { get; set; }
         }
 
-        [ClassContainer]
         public class Item3
         {
             public Guid? Id;
@@ -25,26 +22,22 @@ namespace Utilities.Container.Tests.__models
             public string? Description;
         }
 
-        [ClassContainer]
         public class List1
         {
             public List<int> Items;
         }
 
-        [ClassContainer]
         public class List2
         {
             public List<int> Items;
             public int[] Items2;
         }
 
-        [ClassContainer]
         public class Dictionary2
         {
             public Dictionary<string, string> Pair;
         }
 
-        [ClassContainer]
         public class ItemComplex
         {
             public int Id { get; set; }
@@ -56,7 +49,6 @@ namespace Utilities.Container.Tests.__models
             public Dictionary2 Dictionary2 { get; set;}
         }
 
-        [ClassContainer]
         public class FieldPropEvent
         {
             public int Field1;

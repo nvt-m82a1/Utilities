@@ -19,7 +19,7 @@ namespace Utilities.Container.Converter.Tests
         public void ForceClassTest_getitem_exception()
         {
             var data = new DataTest.ForceClass { Id = 1, Name = "forceclass" };
-            var bytes = DataConvert.Instance.GetBytes(data, true);
+            var bytes = DataConvert.Instance.GetBytes(data);
             Assert.IsNotNull(bytes);
             var item = DataConvert.Instance.GetItem<DataTest.ForceClass>(bytes);
         }
@@ -28,10 +28,10 @@ namespace Utilities.Container.Converter.Tests
         public void ForceClassTest()
         {
             var data = new DataTest.ForceClass { Id = 1, Name = "forceclass" };
-            var bytes = DataConvert.Instance.GetBytes(data, true);
+            var bytes = DataConvert.Instance.GetBytes(data);
             Assert.IsNotNull(bytes);
 
-            var item = DataConvert.Instance.GetItem<DataTest.ForceClass>(bytes, true);
+            var item = DataConvert.Instance.GetItem<DataTest.ForceClass>(bytes);
             Assert.IsNotNull(item);
 
             Assert.AreEqual(data.Id, item.Id);
@@ -49,10 +49,10 @@ namespace Utilities.Container.Converter.Tests
                 Name = "forceclass"
             };
 
-            var bytes = DataConvert.Instance.GetBytes(data, true);
+            var bytes = DataConvert.Instance.GetBytes(data);
             Assert.IsNotNull(bytes);
 
-            var item = DataConvert.Instance.GetItem<DataTest.ForceSkipClass3>(bytes, true);
+            var item = DataConvert.Instance.GetItem<DataTest.ForceSkipClass3>(bytes);
             Assert.IsNotNull(item);
 
             Assert.AreEqual(data.Id, item.Id);
@@ -67,7 +67,7 @@ namespace Utilities.Container.Converter.Tests
         public void SkipTest_empty()
         {
             var data = new DataTest.ForceSkipClass1 { Id = 1 };
-            var members = TypesPool.Scan(data.GetType(), true);
+            var members = TypesPool.Scan(data.GetType());
             Assert.AreEqual(0, members.Length);
         }
 
@@ -75,12 +75,12 @@ namespace Utilities.Container.Converter.Tests
         public void SkipTest_convert()
         {
             var data = new DataTest.ForceSkipClass2 { Id = 1, Name = "forceclass" };
-            var members = TypesPool.Scan(data.GetType(), true);
+            var members = TypesPool.Scan(data.GetType());
             Assert.AreEqual(1, members.Length);
-            var bytes = DataConvert.Instance.GetBytes(data, true);
+            var bytes = DataConvert.Instance.GetBytes(data);
             Assert.IsNotNull(bytes);
 
-            var item = DataConvert.Instance.GetItem<DataTest.ForceSkipClass2>(bytes, true);
+            var item = DataConvert.Instance.GetItem<DataTest.ForceSkipClass2>(bytes);
             Assert.IsNotNull(item);
 
             Assert.AreEqual(data.Id, item.Id);
@@ -90,13 +90,13 @@ namespace Utilities.Container.Converter.Tests
         public void SkipTest_readwrite()
         {
             var data = new DataTest.ForceSkipClass2 { Id = 1, Name = "forceclass" };
-            var bytes = DataBinding.Instance.ReadMembers(data, true);
+            var bytes = DataBinding.Instance.ReadMembers(data);
             Assert.IsNotNull(bytes);
 
             data.Id = 2;
             data.Name = "forceclass2";
 
-            DataBinding.Instance.WriteMembers(data, bytes, true);
+            DataBinding.Instance.WriteMembers(data, bytes);
 
             Assert.AreEqual(1, data.Id);
             Assert.AreEqual("forceclass2", data.Name);

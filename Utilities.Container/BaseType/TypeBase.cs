@@ -40,7 +40,8 @@ namespace Utilities.Container.BaseType
         /// <param name="wrap">Đối tượng chứa dữ liệu</param>
         /// <param name="container">Container dữ liệu</param>
         /// <param name="converter">Chuyển đổi dữ liệu</param>
-        public abstract void BindingItem(object wrap, DataContainer container, TypeConvert converter);
+        /// <param name="refsPool">Danh sách reference</param>
+        public abstract void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool);
 
         /// <summary>
         /// Lấy giá trị từ wrap và ghi vào container
@@ -48,7 +49,8 @@ namespace Utilities.Container.BaseType
         /// <param name="wrap">Đối tượng chứa dữ liệu</param>
         /// <param name="container">Container dữ liệu</param>
         /// <param name="converter">Chuyển đổi dữ liệu</param>
-        public abstract void BindingContainer(object wrap, DataContainer container, TypeConvert converter);
+        /// <param name="refsPool">Danh sách reference</param>
+        public abstract void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool);
 
         /// <summary>
         /// Đọc this type trong container
@@ -56,7 +58,8 @@ namespace Utilities.Container.BaseType
         /// <param name="container">Container dữ liệu</param>
         /// <param name="converter">Chuyển đổi dữ liệu</param>
         /// <param name="OnItemResult">Enumerable(item, index) hoặc (key, value)</param>
-        public abstract void Read(DataContainer container, TypeConvert converter, Action<object, object?> OnItemResult);
+        /// <param name="refsPool">Danh sách reference</param>
+        public abstract void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult);
 
         /// <summary>
         /// Ghi data vào container
@@ -64,6 +67,7 @@ namespace Utilities.Container.BaseType
         /// <param name="data">Dữ liệu</param>
         /// <param name="container">Container dữ liệu</param>
         /// <param name="converter">Chuyển đổi dữ liệu</param>
-        public abstract void Write(object? data, DataContainer container, TypeConvert converter);
+        /// <param name="refsPool">Danh sách reference</param>
+        public abstract void Write(object? data, DataContainer container, TypeConvert converter, ReferencesPool refsPool);
     }
 }

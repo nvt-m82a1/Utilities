@@ -16,7 +16,7 @@ namespace Utilities.Container.Datatype
         {
         }
 
-        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
@@ -24,19 +24,19 @@ namespace Utilities.Container.Datatype
             if (container.ReadBoolean() == true)
                 Binding.SetValue!.Invoke(wrap, null);
             else
-                Read(container, converter, (value, _) => Binding.SetValue.Invoke(wrap, value));
+                Read(container, converter, refsPool, (value, _) => Binding.SetValue.Invoke(wrap, value));
         }
 
-        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.GetValue != null);
 
             var value = Binding.GetValue.Invoke(wrap);
-            Write(value, container, converter);
+            Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
         {
             var (len, bytes) = container.ReadArray();
             var items = (IEnumerable)converter.BytesToArray(this.Info, 1, bytes!.ToArray(), 0)!;
@@ -44,7 +44,7 @@ namespace Utilities.Container.Datatype
             OnItemResult?.Invoke(item!, null);
         }
 
-        public override void Write(object? value, DataContainer container, TypeConvert converter)
+        public override void Write(object? value, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             container.AddBoolean(value == null);
 

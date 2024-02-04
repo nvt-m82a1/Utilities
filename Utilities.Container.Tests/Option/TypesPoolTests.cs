@@ -9,6 +9,7 @@ namespace Utilities.Container.Option.Tests
         [TestMethod()]
         public void ScanTest_Hashset()
         {
+            var refsPool = new ReferencesPool();
             var typeInt1 = TypesPool.Scan<int>();
             var typeInt2 = TypesPool.Scan<int>();
 

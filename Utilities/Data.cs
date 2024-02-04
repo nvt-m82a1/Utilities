@@ -1,8 +1,5 @@
-﻿using Utilities.Container.Option;
-
-namespace Utilities
+﻿namespace Utilities
 {
-    [ClassContainer]
     internal class Data
     {
         public int a;
@@ -14,9 +11,15 @@ namespace Utilities
         public bool[] j;
         public DataEnum k;
         public DataEnum[] m;
+
+        public Data ref_this;
+
+        public Data()
+        {
+            ref_this = this;
+        }
     }
 
-    [ClassContainer]
     public class Data2
     {
         public int c;

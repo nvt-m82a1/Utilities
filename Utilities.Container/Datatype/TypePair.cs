@@ -16,7 +16,7 @@ namespace Utilities.Container.Datatype
         {
         }
 
-        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
@@ -27,21 +27,21 @@ namespace Utilities.Container.Datatype
                 var pairWrap = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>)
                     .MakeGenericType(this.Others![0].Info.Type, this.Others![1].Info.Type))!;
 
-                Read(container, converter, pairWrap.Add);
+                Read(container, converter, refsPool, pairWrap.Add);
                 Binding.SetValue.Invoke(wrap, pairWrap);
             }
         }
 
-        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.GetValue != null);
 
             var value = Binding.GetValue.Invoke(wrap);
-            Write(value, container, converter);
+            Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
         {
             var length = container.ReadLength();
             if (length == 0) return;
@@ -64,7 +64,7 @@ namespace Utilities.Container.Datatype
             }
         }
 
-        public override void Write(object? value, DataContainer container, TypeConvert converter)
+        public override void Write(object? value, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             container.AddBoolean(value == null);
             if (value == null) return;

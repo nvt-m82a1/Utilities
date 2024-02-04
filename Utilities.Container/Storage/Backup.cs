@@ -1,13 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using Utilities.Container.Converter;
-using Utilities.Container.Option;
 
 namespace Utilities.Container.Storage
 {
     /// <summary>
     /// Tập hợp những bản lưu trữ dữ liệu
     /// </summary>
-    [ClassContainer]
     public class Backup
     {
         public static Backup Instance = new Backup();

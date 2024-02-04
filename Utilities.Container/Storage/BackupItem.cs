@@ -1,11 +1,8 @@
-﻿using Utilities.Container.Option;
-
-namespace Utilities.Container.Storage
+﻿namespace Utilities.Container.Storage
 {
     /// <summary>
     /// Một bản lưu trữ dữ liệu
     /// </summary>
-    [ClassContainer]
     public class BackupItem
     {
         /// <summary>

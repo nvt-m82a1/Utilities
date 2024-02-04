@@ -20,7 +20,7 @@ namespace Utilities.Container.Datatype
             this.AddMethod = Info.Type.GetMethod(addMethodName, [dataType]);
         }
 
-        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
@@ -46,23 +46,23 @@ namespace Utilities.Container.Datatype
                     }
                 }
 
-                Read(container, converter, (list, length) =>
+                Read(container, converter, refsPool, (list, length) =>
                 {
                     Binding.SetValue.Invoke(wrap, list);
                 });
             }
         }
 
-        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter)
+        public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.GetValue != null);
 
             var value = Binding.GetValue.Invoke(wrap);
-            Write(value, container, converter);
+            Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
         {
             var length = container.ReadLength();
             if (length == 0) return;
@@ -72,12 +72,12 @@ namespace Utilities.Container.Datatype
             var listWrap = Activator.CreateInstance(Info.Type)!;
             Action<object, object?> actionAddItem = (item, index) => AddMethod!.Invoke(listWrap, [item]);
 
-            if (Others![0].Info.IsContainer)
+            if (Others![0] is TypeCustom)
             {
                 for (var i = 0; i < length; i++)
-                    Others![0].Read(container, converter, actionAddItem);
+                    Others![0].Read(container, converter, refsPool, actionAddItem);
             }
-            else if (Others![0].Info.IsEnum)
+            else if (Others![0] is TypeEnum)
             {
                 var items = converter.BytesToArray(Others![0].Others![0].Info, length, bytes!.ToArray(), 0);
                 foreach (var item in (IEnumerable)items!)
@@ -102,7 +102,7 @@ namespace Utilities.Container.Datatype
                 OnItemResult?.Invoke(listWrap, length);
         }
 
-        public override void Write(object? value, DataContainer container, TypeConvert converter)
+        public override void Write(object? value, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             container.AddBoolean(value == null);
             if (value == null) return;
@@ -119,12 +119,12 @@ namespace Utilities.Container.Datatype
             var list = (IEnumerable)value;
             container.AddLength(length);
 
-            if (Others![0].Info.IsContainer)
+            if (Others![0] is TypeCustom)
             {
                 foreach (var item in list)
-                    this.Others![0].Write(item, container, converter);
+                    this.Others![0].Write(item, container, converter, refsPool);
             }
-            else if (Others![0].Info.IsEnum)
+            else if (Others![0] is TypeEnum)
             {
                 var itemsByte = converter.ArrayToBytes(Others![0].Others![0].Info, list).SelectMany(x => x);
                 container.AddArray(itemsByte);
