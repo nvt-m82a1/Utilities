@@ -13,11 +13,6 @@
         public DataEnum[] m;
 
         public Data ref_this;
-
-        public Data()
-        {
-            ref_this = this;
-        }
     }
 
     public class Data2
@@ -31,5 +26,19 @@
         No0 = 0,
         No1 = 1,
         No2 = 2,
+    }
+
+    public class Data4
+    {
+        public static Data4 Instance = new Data4();
+
+        public int Id;
+        public string Name;
+    }
+
+    public class Data5
+    {
+        public string Name = "a";
+        public IEnumerable<IEnumerable<string>> Data = [["10", "11"], ["12", "13"]];
     }
 }

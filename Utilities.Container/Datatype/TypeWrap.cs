@@ -1,7 +1,7 @@
 ﻿namespace Utilities.Container.Datatype
 {
     /// <summary>
-    /// Lớp wrap để xử lý kiểu dữ liệu buildin
+    /// Lớp wrap để xử lý kiểu dữ liệu value
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class TypeWrap<T>

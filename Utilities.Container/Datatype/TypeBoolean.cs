@@ -20,15 +20,10 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() == true)
-                Binding.SetValue!.Invoke(wrap, null);
-            else
+            Read(container, converter, refsPool, (item, _) =>
             {
-                Read(container, converter, refsPool, (item, _) =>
-                {
-                    Binding.SetValue.Invoke(wrap, item);
-                });
-            }
+                Binding.SetValue.Invoke(wrap, item);
+            });
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
@@ -40,8 +35,14 @@ namespace Utilities.Container.Datatype
             Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object?, object?> OnItemResult)
         {
+            if (container.ReadBoolean() == true)
+            {
+                OnItemResult.Invoke(null, null);
+                return;
+            }
+
             var value = container.ReadBoolean();
             OnItemResult?.Invoke(value!, null);
         }

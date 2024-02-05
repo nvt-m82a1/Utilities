@@ -15,6 +15,7 @@ namespace Utilities.Container.Option.Tests
 
             Assert.IsTrue(typeInt1 == typeInt2);
         }
+
         [TestMethod()]
         public void ScanTest_Hashset_2()
         {

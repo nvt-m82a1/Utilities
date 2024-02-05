@@ -18,9 +18,9 @@ namespace Utilities
                 k = DataEnum.No1,
                 m = [DataEnum.No1, DataEnum.No2, DataEnum.No0, DataEnum.No1]
             };
+            data.ref_this = data;
 
             var bytes = DataConvert.Instance.GetBytes(data);
-
             var data2 = DataConvert.Instance.GetItem<Data>(bytes!);
             var bytes2 = DataConvert.Instance.GetBytes(data2);
 

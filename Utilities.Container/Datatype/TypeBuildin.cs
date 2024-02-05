@@ -21,10 +21,10 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() == true)
-                Binding.SetValue!.Invoke(wrap, null);
-            else
-                Read(container, converter, refsPool, (value, _) => Binding.SetValue.Invoke(wrap, value));
+            Read(container, converter, refsPool, (value, _) =>
+            {
+                Binding.SetValue.Invoke(wrap, value);
+            });
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
@@ -36,8 +36,14 @@ namespace Utilities.Container.Datatype
             Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object?, object?> OnItemResult)
         {
+            if (container.ReadBoolean() == true)
+            {
+                OnItemResult.Invoke(null, null);
+                return;
+            }
+
             var (len, bytes) = container.ReadArray();
             var items = (IEnumerable)converter.BytesToArray(this.Info, 1, bytes!.ToArray(), 0)!;
             var item = items.First();
@@ -47,8 +53,8 @@ namespace Utilities.Container.Datatype
         public override void Write(object? value, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             container.AddBoolean(value == null);
-
             if (value == null) return;
+
             var bytes = converter.ItemToBytes(this.Info, value);
             container.AddArray(bytes!);
         }

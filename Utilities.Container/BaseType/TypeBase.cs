@@ -59,7 +59,7 @@ namespace Utilities.Container.BaseType
         /// <param name="converter">Chuyển đổi dữ liệu</param>
         /// <param name="OnItemResult">Enumerable(item, index) hoặc (key, value)</param>
         /// <param name="refsPool">Danh sách reference</param>
-        public abstract void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult);
+        public abstract void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object?, object?> OnItemResult);
 
         /// <summary>
         /// Ghi data vào container

@@ -20,16 +20,22 @@ namespace Utilities.Container.Datatype
         {
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
-            if (container.ReadBoolean() == true)
-                Binding.SetValue!.Invoke(wrap, null);
-            else
-            {
-                var pairWrap = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>)
-                    .MakeGenericType(this.Others![0].Info.Type, this.Others![1].Info.Type))!;
 
-                Read(container, converter, refsPool, pairWrap.Add);
-                Binding.SetValue.Invoke(wrap, pairWrap);
-            }
+            var pairWrap = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>)
+                .MakeGenericType(this.Others![0].Info.Type, this.Others![1].Info.Type))!;
+
+            Read(container, converter, refsPool, (key, value) =>
+            {
+                if (key != null)
+                    pairWrap.Add(key, value);
+                else
+                {
+                    Binding.SetValue.Invoke(wrap, null);
+                    return;
+                }
+            });
+
+            Binding.SetValue.Invoke(wrap, pairWrap);
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
@@ -41,8 +47,14 @@ namespace Utilities.Container.Datatype
             Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object?, object?> OnItemResult)
         {
+            if (container.ReadBoolean() == true)
+            {
+                OnItemResult.Invoke(null, null);
+                return;
+            }
+
             var length = container.ReadLength();
             if (length == 0) return;
 

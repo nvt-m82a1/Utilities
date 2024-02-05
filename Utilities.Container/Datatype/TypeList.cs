@@ -25,32 +25,10 @@ namespace Utilities.Container.Datatype
             Debug.Assert(Binding != null);
             Debug.Assert(Binding.SetValue != null);
 
-            if (container.ReadBoolean() == true)
-                Binding.SetValue!.Invoke(wrap, null);
-            else
+            Read(container, converter, refsPool, (list, length) =>
             {
-                // empty list
-                if (container.ReadBoolean() == true)
-                {
-                    if (Info.IsArray)
-                    {
-                        var arr = Activator.CreateInstance(Others![0].Info.Type.MakeArrayType());
-                        Binding.SetValue.Invoke(wrap, arr);
-                        return;
-                    }
-                    else
-                    {
-                        var list = Activator.CreateInstance(Info.Type);
-                        Binding.SetValue.Invoke(wrap, list);
-                        return;
-                    }
-                }
-
-                Read(container, converter, refsPool, (list, length) =>
-                {
-                    Binding.SetValue.Invoke(wrap, list);
-                });
-            }
+                Binding.SetValue.Invoke(wrap, list);
+            });
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
@@ -62,31 +40,51 @@ namespace Utilities.Container.Datatype
             Write(value, container, converter, refsPool);
         }
 
-        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object, object?> OnItemResult)
+        public override void Read(DataContainer container, TypeConvert converter, ReferencesPool refsPool, Action<object?, object?> OnItemResult)
         {
+            if (container.ReadBoolean() == true)
+            {
+                OnItemResult.Invoke(null, null);
+                return;
+            }
+            
+            if (container.ReadBoolean() == true)
+            {
+                if (Info.IsArray)
+                {
+                    var arr = Activator.CreateInstance(Others![0].Info.Type.MakeArrayType());
+                    OnItemResult.Invoke(arr, null);
+                    return;
+                }
+                else
+                {
+                    var list = Activator.CreateInstance(Info.Type);
+                    OnItemResult.Invoke(list, null);
+                    return;
+                }
+            }
+
             var length = container.ReadLength();
             if (length == 0) return;
 
-            var (len, bytes) = container.ReadArray();
-
             var listWrap = Activator.CreateInstance(Info.Type)!;
-            Action<object, object?> actionAddItem = (item, index) => AddMethod!.Invoke(listWrap, [item]);
-
-            if (Others![0] is TypeCustom)
+            Action<object?, object?> actionAddItem = (item, index) => AddMethod!.Invoke(listWrap, [item]);
+            
+            if (Others![0] is TypeCustom or TypeList)
             {
                 for (var i = 0; i < length; i++)
                     Others![0].Read(container, converter, refsPool, actionAddItem);
             }
             else if (Others![0] is TypeEnum)
             {
+                var (len, bytes) = container.ReadArray();
                 var items = converter.BytesToArray(Others![0].Others![0].Info, length, bytes!.ToArray(), 0);
                 foreach (var item in (IEnumerable)items!)
-                {
                     actionAddItem.Invoke(Enum.ToObject(Others![0].Info.Type, item), null);
-                }
             }
             else
             {
+                var (len, bytes) = container.ReadArray();
                 var items = converter.BytesToArray(Others![0].Info, length, bytes!.ToArray(), 0);
                 foreach (var item in (IEnumerable)items!)
                     actionAddItem.Invoke(item, null);
@@ -119,7 +117,7 @@ namespace Utilities.Container.Datatype
             var list = (IEnumerable)value;
             container.AddLength(length);
 
-            if (Others![0] is TypeCustom)
+            if (Others![0] is TypeCustom or TypeList)
             {
                 foreach (var item in list)
                     this.Others![0].Write(item, container, converter, refsPool);
