@@ -1,0 +1,19 @@
+#menu {
+    background-color: ivory;
+    padding: 4px 40px 4px 8px;
+}
+
+#menu .jselement.menu-item {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+
+#menu .jselement.menu-item:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+#menu .jselement.menu-item.menu-highlight {
+    color: turquoise;
+}

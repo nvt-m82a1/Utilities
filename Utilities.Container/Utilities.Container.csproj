@@ -4,9 +4,9 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.6</Version>
-		<FileVersion>1.0.6</FileVersion>
-		<AssemblyVersion>1.0.6</AssemblyVersion>
+		<Version>1.0.7</Version>
+		<FileVersion>1.0.7</FileVersion>
+		<AssemblyVersion>1.0.7</AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Data Container</Title>
 		<Description>Lưu trữ và đọc dữ liệu</Description>

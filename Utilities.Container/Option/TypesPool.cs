@@ -30,7 +30,7 @@ namespace Utilities.Container.Option
             if (!scanSaved.ContainsKey(typecode))
             {
                 var fields = dataType.GetFields()
-                    .Where(f => !Attribute.IsDefined(f, typeof(SkipContainerAttribute)))
+                    .Where(f => !f.IsInitOnly && !Attribute.IsDefined(f, typeof(SkipContainerAttribute)))
                     .Select(f =>
                 {
                     var type = Create(f.FieldType);
@@ -43,7 +43,7 @@ namespace Utilities.Container.Option
                 });
 
                 var props = dataType.GetProperties()
-                    .Where(p => !Attribute.IsDefined(p, typeof(SkipContainerAttribute)))
+                    .Where(p => p.CanRead && p.CanWrite && !Attribute.IsDefined(p, typeof(SkipContainerAttribute)))
                     .Select(p =>
                 {
                     var type = Create(p.PropertyType);

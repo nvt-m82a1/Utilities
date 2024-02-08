@@ -1,0 +1,16 @@
+#page {
+    padding: 4px 8px 4px 20px;
+}
+
+#page .jselement.method {
+    padding-top: 4px;
+    padding-bottom: 20px;
+}
+
+#page .jselement.method-name {
+    padding-bottom: 4px;
+}
+
+#page .jselement.method-description {
+    padding-left: 20px;
+}

@@ -1,0 +1,21 @@
+@import url(header.css);
+@import url(menu.css);
+@import url(page.css);
+@import url(footer.css);
+
+html {
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+}
+
+#app_body {
+    display: flex;
+    flex-grow: 1;
+    z-index: 1;
+}

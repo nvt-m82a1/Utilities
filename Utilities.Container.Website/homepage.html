@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="files/css/app.css">
+</header>
+
+<body>
+    <div id="header">
+        <div class="left">
+            <div id="app_name">Utilities.Container</div>
+        </div>
+        <div class="right">
+            <div><a target="_blank" href="https://github.com/nvt-m82a1/Utilities">Git</a></div>
+            <div>v1.0.6</div>
+        </div>
+    </div>
+
+    <div id="app_body">
+        <div id="menu"></div>
+        <div id="page">
+            <div id="app_description">
+                <h3>Lưu trữ và phục hồi dữ liệu.</h3>
+
+                <h4>Kiểu dữ liệu hỗ trợ</h4>
+                <div>- Dữ liệu có sẵn: int, string, guid, datetime, ...</div>
+                <div>- Dữ liệu danh sách: list, array, dictionary, ...</div>
+                <div>- Dữ liệu class</div>
+                <div>- Hỗ trợ tham chiếu lặp</div>
+                
+                <h4>Chuyển dữ liệu kiểu class sang bytes và phục hồi lại đối tượng.</h4>
+                <div>var item = new ItemType();</div>
+                <div>var data = DataConvert.Instance.GetBytes(item);</div>
+                <div>var item_restore = DataConvert.Instance.GetItem<ItemType>(data);</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div>Copyright <a href="mailto:nvt.m82a1@gmail.com">nvt.m82a1@gmail.com</a></div>
+    </div>
+
+    <script src="files/model/pagemodel.js"></script>
+    <script src="files/js/pagerender.js"></script>
+</body>
+
+</html>
