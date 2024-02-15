@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Utilities.Container.Storage.Tests
+﻿namespace Utilities.Container.Storage.Tests
 {
     [TestClass()]
     public class AutosaveTests

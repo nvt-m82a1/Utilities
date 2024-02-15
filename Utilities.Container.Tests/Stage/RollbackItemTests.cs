@@ -1,4 +1,4 @@
-﻿using Utilities.Container.Stage.Tests.__models;
+﻿using Utilities.Container.Tests.__models;
 
 namespace Utilities.Container.Stage.Tests
 {

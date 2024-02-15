@@ -123,7 +123,7 @@ namespace Utilities.Container.Storage
         {
             var backupItem = mapKey[key];
             var bytes = backupItem.Get(reverseIndex);
-            var item = DataConvert.Instance.GetItem<T?>(bytes);
+            var item = DataConvert.Instance.GetItem<T>(bytes);
             return item;
         }
 
@@ -139,7 +139,7 @@ namespace Utilities.Container.Storage
         {
             var backupItem = mapKey[key];
             var bytes = backupItem.Get(timestamp, reverseIndex);
-            var item = DataConvert.Instance.GetItem<T?>(bytes);
+            var item = DataConvert.Instance.GetItem<T>(bytes);
             return item;
         }
     }

@@ -164,7 +164,7 @@ namespace Utilities.Container.Base
                     ArraySizes[ArraySizeIter + 2],
                     ArraySizes[ArraySizeIter + 3]];
 
-                var size = BitConverter.ToInt32(sizeSpan);
+                var size = BitConverter.ToInt32(sizeSpan, 0);
                 var bytes = Arrays[ArrayIter];
                 ArrayIter++;
                 ArraySizeIter += 4;
@@ -267,7 +267,7 @@ namespace Utilities.Container.Base
                             ArraySizes[i + 2],
                             ArraySizes[i + 3]];
                         i += 4;
-                        var arraySize = BitConverter.ToInt32(arraySizeSpan);
+                        var arraySize = BitConverter.ToInt32(arraySizeSpan, 0);
 
                         var arrayBytes = new ReadOnlySpan<byte>(buffer, dataPivot, arraySize);
                         Arrays.Add(arrayBytes.ToArray());
@@ -319,9 +319,12 @@ namespace Utilities.Container.Base
         /// Lấy mã băm
         /// </summary>
         /// <param name="obj">Container</param>
-        public int GetHashCode([DisallowNull] ByteContainer obj)
+        public int GetHashCode(ByteContainer obj)
         {
-            var hashcode = HashCode.Combine(Items, Bits, ArraySizes, Arrays);
+            var hashcode = Items.GetHashCode() ^
+                Bits.GetHashCode() ^
+                ArraySizes.GetHashCode() ^
+                Arrays.GetHashCode();
             return hashcode;
         }
     }

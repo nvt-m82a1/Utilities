@@ -98,7 +98,7 @@ namespace Utilities.Container.Base
             if (this.TotalElements == 0)
                 return length;
 
-            var subContainerSize = (byte)SubContainers.Count();
+            var subContainerSize = (byte)SubContainers.Count;
             var bits = Bits.Export();
             var bytes = Bytes.Export();
             var subContainers = SubContainers.SelectMany(container => container.Export());
@@ -167,9 +167,11 @@ namespace Utilities.Container.Base
         /// Lấy mã băm
         /// </summary>
         /// <param name="obj">Container</param>
-        public int GetHashCode([DisallowNull] BaseContainer<TSelf> obj)
+        public int GetHashCode(BaseContainer<TSelf> obj)
         {
-            var hashcode = HashCode.Combine(Bits, Bytes, SubContainers);
+            var hashcode = Bits.GetHashCode() ^
+                Bytes.GetHashCode() ^
+                SubContainerIter.GetHashCode();
             foreach (var item in SubContainers) hashcode ^= item.GetHashCode();
             return hashcode;
         }

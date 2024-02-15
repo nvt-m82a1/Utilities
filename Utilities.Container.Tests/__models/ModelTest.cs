@@ -1,4 +1,4 @@
-﻿namespace Utilities.Container.Stage.Tests.__models
+﻿namespace Utilities.Container.Tests.__models
 {
     internal class ModelTest
     {

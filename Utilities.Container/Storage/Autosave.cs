@@ -11,7 +11,6 @@ namespace Utilities.Container.Storage
 
         protected ConcurrentDictionary<string, (int, Func<object?>)> mapKey;
         protected ConcurrentDictionary<int, List<string>> mapTimer;
-        protected ConcurrentDictionary<string, string> mapException;
         protected CancellationTokenSource cts;
 
         /// <summary>
@@ -23,7 +22,6 @@ namespace Utilities.Container.Storage
         {
             mapTimer = new();
             mapKey = new();
-            mapException = new();
             cts = new();
             Backup = new Backup();
         }
@@ -41,45 +39,42 @@ namespace Utilities.Container.Storage
         /// <param name="getValue">Hàm lấy dữ liệu</param>
         /// <param name="timeInterval">Thời gian tạo một bản lưu trữ, tính theo giây</param>
         /// <param name="numberOfBackup">Số lượng bản ghi backup</param>
-        public bool Create<T>(string key, Func<T?> getValue, int timeInterval = 10, int numberOfBackup = 1)
+        public bool Create<T>(string key, Func<T> getValue, int timeInterval = 10, int numberOfBackup = 1)
         {
             if (mapKey.ContainsKey(key)) return false;
 
-            Func<object?> actionGetValue = () => getValue();
+            Func<object?> actionGetValue = () => getValue.Invoke();
             mapKey[key] = (timeInterval, actionGetValue);
 
             if (!mapTimer.ContainsKey(timeInterval))
             {
                 Backup.Setup(key, numberOfBackup);
 
-                var newTimer = new PeriodicTimer(TimeSpan.FromSeconds(timeInterval));
                 var newList = new List<string> { key };
 
-                var timerPair = new KeyValuePair<int, List<string>>(timeInterval, newList);
-                mapTimer.TryAdd(timerPair.Key, timerPair.Value);
+                mapTimer.TryAdd(timeInterval, newList);
 
                 var value = actionGetValue.Invoke();
                 Backup.Add(key, value);
 
-                Task.Factory.StartNew(async () =>
+                var timer = new System.Timers.Timer(timeInterval * 1000);
+                timer.Elapsed += (sender, e) =>
                 {
-                    while (await newTimer.WaitForNextTickAsync(cts.Token))
+                    for (var i = 0; i < newList.Count; i++)
                     {
-                        for (var i = 0; i < newList.Count; i++)
-                        {
-                            var (itemTimeInterval, itemActionGetValue) = mapKey[newList[i]];
-                            var itemValue = itemActionGetValue.Invoke();
-                            Backup.Add(newList[i], itemValue);
-                        }
-
-                        if (newList.Count == 0)
-                        {
-                            mapTimer.TryRemove(timerPair);
-                            newTimer.Dispose();
-                            break;
-                        }
+                        var (itemTimeInterval, actionGetValue) = mapKey[newList[i]];
+                        var itemValue = actionGetValue.Invoke();
+                        Backup.Add(newList[i], itemValue);
                     }
-                });
+
+                    if (newList.Count == 0)
+                    {
+                        mapTimer.TryRemove(timeInterval, out _);
+                        timer.Stop();
+                        timer.Dispose();
+                    }
+                };
+                timer.Start();
             }
             else
             {
@@ -129,8 +124,7 @@ namespace Utilities.Container.Storage
             var list = mapTimer[timeInterval];
             list.Remove(key);
 
-            var keyPair = new KeyValuePair<string, (int, Func<object?>)>(key, mapKey[key]);
-            mapKey.TryRemove(keyPair);
+            mapKey.TryRemove(key, out _);
         }
     }
 }

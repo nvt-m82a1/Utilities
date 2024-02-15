@@ -203,9 +203,11 @@ namespace Utilities.Container.Base
         /// Lấy mã băm
         /// </summary>
         /// <param name="obj">Container</param>
-        public int GetHashCode([DisallowNull] BitContainer obj)
+        public int GetHashCode(BitContainer obj)
         {
-            var hashcode = HashCode.Combine(Offset, Data, Data.Count);
+            var hashcode = Offset.GetHashCode() ^
+                Data.GetHashCode() ^
+                Data.Count.GetHashCode();
             return hashcode;
         }
     }

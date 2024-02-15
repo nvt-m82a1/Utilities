@@ -20,8 +20,8 @@
             if (!refId.ContainsKey(obj))
             {
                 var index = refId.Count;
-                refId.TryAdd(obj, index);
-                refIdReverse.TryAdd(index, obj);
+                refId.Add(obj, index);
+                refIdReverse.Add(index, obj);
                 return (false, -1);
             }
 

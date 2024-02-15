@@ -17,11 +17,11 @@ namespace Utilities.Container.Converter
         /// </summary>
         /// <typeparam name="T">Kiểu dữ liệu</typeparam>
         /// <param name="data">Đối tượng</param>
-        public byte[]? GetBytes<T>(T? data)
+        public byte[]? GetBytes<T>(T data)
         {
             if (data == null) return null;
 
-            ReferencesPool refsPool = new();
+            ReferencesPool refsPool = new ReferencesPool();
             var dataContainer = new DataContainer();
             var dataType = TypesPool.Create(data.GetType());
 
@@ -43,7 +43,7 @@ namespace Utilities.Container.Converter
             var wrapType = TypesPool.Scan(typeof(TypeWrap<T>));
             var dataType = wrapType[0];
 
-            ReferencesPool refsPool = new();
+            ReferencesPool refsPool = new ReferencesPool();
 
             var container = new DataContainer();
             container.Import(data);

@@ -225,7 +225,7 @@ namespace Utilities.Container.Converter
                             .Select(i =>
                             {
                                 var span = new ReadOnlySpan<byte>(buffer, offset + i * 16, 16);
-                                return new Guid(span);
+                                return new Guid(span.ToArray());
                             });
                     }
 

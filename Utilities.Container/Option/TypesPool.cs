@@ -23,9 +23,9 @@ namespace Utilities.Container.Option
         public static TypeBase[] Scan(Type? dataType)
         {
             if (dataType == null) return Array.Empty<TypeBase>();
-            var typecode = HashCode.Combine(dataType.GetHashCode(), dataType.FullName);
+            var typecode = dataType.GetHashCode() ^ dataType.FullName.GetHashCode();
             foreach (var subtype in dataType.GenericTypeArguments)
-                typecode ^= HashCode.Combine(subtype.GetHashCode(), subtype.FullName);
+                typecode ^= subtype.GetHashCode() ^ subtype.FullName.GetHashCode();
 
             if (!scanSaved.ContainsKey(typecode))
             {
@@ -152,7 +152,7 @@ namespace Utilities.Container.Option
                     if (isBoolean) return new TypeBoolean(target);
 
                     // Type trả về là một Iterator
-                    var isIterator = target.Name.EndsWith("Iterator`1");
+                    var isIterator = target.Name.EndsWith("Iterator`1", StringComparison.CurrentCulture);
                     if (isIterator) return new TypeList(typeof(List<>)
                         .MakeGenericType(target.GenericTypeArguments[0]), "Add", target.GenericTypeArguments[0]);
 

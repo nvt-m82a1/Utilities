@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<LangVersion>12.0</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.7</Version>
-		<FileVersion>1.0.7</FileVersion>
-		<AssemblyVersion>1.0.7</AssemblyVersion>
+		<Version>2.0.0</Version>
+		<FileVersion>2.0.0</FileVersion>
+		<AssemblyVersion>2.0.0</AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Data Container</Title>
-		<Description>Lưu trữ và đọc dữ liệu</Description>
+		<Description>Data binary serialization</Description>
 		<Copyright></Copyright>
 		<IncludeSymbols>True</IncludeSymbols>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -19,9 +20,11 @@
 		<PackageProjectUrl>https://nvt-m82a1.github.io/Utilities.Container/</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/nvt-m82a1/Utilities</RepositoryUrl>
-		<PackageTags>Data convert;</PackageTags>
+		<PackageTags>Data;Convert;</PackageTags>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Authors />
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
 	</PropertyGroup>
 
 	<ItemGroup>

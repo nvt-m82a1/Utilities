@@ -18,20 +18,20 @@ namespace Utilities.Container.Datatype
         public override void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
-            Debug.Assert(Binding.SetValue != null);
+            Debug.Assert(Binding!.SetValue != null);
 
             Read(container, converter, refsPool, (instance, _) =>
             {
-                Binding.SetValue.Invoke(wrap, instance);
+                Binding.SetValue!.Invoke(wrap, instance);
             });
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
-            Debug.Assert(Binding.GetValue != null);
+            Debug.Assert(Binding!.GetValue != null);
 
-            var innerWrap = Binding.GetValue.Invoke(wrap);
+            var innerWrap = Binding.GetValue!.Invoke(wrap);
             Write(innerWrap, container, converter, refsPool);
         }
 
@@ -64,12 +64,12 @@ namespace Utilities.Container.Datatype
             OnItemResult?.Invoke(instance!, null);
         }
 
-        public override void Write(object? innerWrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
+        public override void Write(object? data, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
-            container.AddBoolean(innerWrap == null);
-            if (innerWrap == null) return;
+            container.AddBoolean(data == null);
+            if (data == null) return;
 
-            var (refFound, refIndex) = refsPool.FindValue(innerWrap);
+            var (refFound, refIndex) = refsPool.FindValue(data);
             container.AddBoolean(refFound);
 
             if (refFound)
@@ -79,10 +79,10 @@ namespace Utilities.Container.Datatype
             else
             {
                 var subContainer = new DataContainer();
-                var members = TypesPool.Scan(innerWrap.GetType());
+                var members = TypesPool.Scan(data.GetType());
                 foreach (var member in members)
                 {
-                    member.BindingContainer(innerWrap, subContainer, converter, refsPool);
+                    member.BindingContainer(data, subContainer, converter, refsPool);
                 }
                 container.AddContainer(subContainer);
             }

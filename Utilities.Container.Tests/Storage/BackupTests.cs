@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Container.StorageTests.__models;
-
-namespace Utilities.Container.Storage.Tests
+﻿namespace Utilities.Container.Storage.Tests
 {
     [TestClass()]
     public class BackupTests

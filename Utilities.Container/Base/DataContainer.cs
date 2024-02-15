@@ -35,7 +35,7 @@
             else
             {
                 var bytes = Bytes.ReadItems(4);
-                return BitConverter.ToInt32(bytes);
+                return BitConverter.ToInt32(bytes, 0);
             }
         }
 
@@ -53,7 +53,7 @@
             else
             {
                 var bytes = Bytes.ScanItems(4);
-                return BitConverter.ToInt32(bytes);
+                return BitConverter.ToInt32(bytes, 0);
             }
         }
 

@@ -19,7 +19,7 @@ namespace Utilities.Container.Datatype
         public override void BindingItem(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
-            Debug.Assert(Binding.SetValue != null);
+            Debug.Assert(Binding!.SetValue != null);
 
             var pairWrap = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>)
                 .MakeGenericType(this.Others![0].Info.Type, this.Others![1].Info.Type))!;
@@ -30,20 +30,20 @@ namespace Utilities.Container.Datatype
                     pairWrap.Add(key, value);
                 else
                 {
-                    Binding.SetValue.Invoke(wrap, null);
+                    Binding.SetValue!.Invoke(wrap, null);
                     return;
                 }
             });
 
-            Binding.SetValue.Invoke(wrap, pairWrap);
+            Binding.SetValue!.Invoke(wrap, pairWrap);
         }
 
         public override void BindingContainer(object wrap, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
             Debug.Assert(Binding != null);
-            Debug.Assert(Binding.GetValue != null);
+            Debug.Assert(Binding!.GetValue != null);
 
-            var value = Binding.GetValue.Invoke(wrap);
+            var value = Binding.GetValue!.Invoke(wrap);
             Write(value, container, converter, refsPool);
         }
 
@@ -70,12 +70,12 @@ namespace Utilities.Container.Datatype
             }
         }
 
-        public override void Write(object? value, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
+        public override void Write(object? data, DataContainer container, TypeConvert converter, ReferencesPool refsPool)
         {
-            container.AddBoolean(value == null);
-            if (value == null) return;
+            container.AddBoolean(data == null);
+            if (data == null) return;
 
-            var pair = (IDictionary)value;
+            var pair = (IDictionary)data;
 
             container.AddLength(pair.Count);
             if (pair.Count == 0) return;
